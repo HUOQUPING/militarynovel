@@ -1,24 +1,27 @@
-# project
+### …or create a new repository on the command line
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
 ```
-npm run build
+echo "# reading-with-iron-and-blood" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:p0ssword/reading-with-iron-and-blood.git
+git push -u origin main
 ```
 
-### Lints and fixes files
+### …or push an existing repository from the command line
+
+
+
 ```
-npm run lint
+git remote add origin git@github.com:p0ssword/reading-with-iron-and-blood.git
+git branch -M main
+git push -u origin main
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### …or import code from another repository
+
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
