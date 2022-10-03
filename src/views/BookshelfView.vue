@@ -1,9 +1,106 @@
 <template>
   <div class="home">
-    书架
+    <div class="homeNav">
+      <span>书架</span>
+      <img src="../assets/images/svg_search.png" alt="搜索" />
+      <img src="../assets/images/svg_edit.png" alt="修改" />
+    </div>
+
+    <ul class="bookList">
+        <li v-for="n in bookArr" :key="n.bookid">
+          <img :src="n.coverurl">
+          <span>{{n.bookname}}</span>
+          <p>{{n.bookstatename}}</p>
+        </li>
+    </ul>
   </div>
 </template>
 
 <script>
+export default {
+  data(){
+    return {
+        bookArr:[]
+    } 
+  },
 
+  created(){
+    this.getData()
+  },
+  methods:{
+     getData(){
+       this.$axios
+       .get('./json/bookCity.json')
+       .then(({data}) => {
+         data.homeparts.forEach(el => {
+           el.book_infos.forEach(book => {
+             this.bookArr.push(book)
+           })
+         });
+       })
+    },
+  }
+
+}
 </script>
+
+<style lang="scss" scoped>
+.home {
+  width: 100vw;
+  .homeNav {
+    height: 50px;
+    width: 100%;
+    border-top: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+    text-align: center;
+    line-height: 50px;
+    position: relative;
+
+    img {
+      width: 30px;
+      position: absolute;
+      right: 60px;
+      top: calc(50% - 15px);
+
+      &:nth-child(3){
+        right: 10px;
+      }
+    }
+
+  }
+
+  .bookList {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex: row;
+    flex-wrap: wrap;
+
+    li{
+      flex: 0 1 33.33333%;
+      height: 220px;
+
+      img {
+        width: 100px;
+        height: 160px;
+        margin: 0 10px;
+      }
+
+      span {
+        display: inline-block;
+        margin: 5px 0 5px 10px;
+        width: 100px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      p {
+        font-size: 14px;
+        color: #ccc;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+</style>

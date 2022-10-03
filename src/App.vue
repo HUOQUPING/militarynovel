@@ -26,6 +26,7 @@ nav {
   text-align: center;
   line-height: 70px;
   box-shadow: 0px 2px 5px black;
+  background-color: white;
   .nav-item {
     flex: 1;
     background-size: 30px 30px;

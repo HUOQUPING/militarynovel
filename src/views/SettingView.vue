@@ -1,8 +1,7 @@
 <template>
   <div class="setting">
     <div class="settingNav">设置</div>
-
-    <div class="loginUser">
+    <div class="loginUser" >
       <img src="../assets/images/personal_icon.png" alt="用户图片" />
       <span>点击登录</span>
     </div>
@@ -30,7 +29,7 @@
 .setting {
   width: 100vw;
   height: 100vh;
-  background-color: #eeebeb;
+  background-color: #f3f0f0;
   .settingNav {
     height: 50px;
     width: 100%;
@@ -58,6 +57,7 @@
       vertical-align: middle;
       color: rgb(237,126,56);
     }
+
   }
 
   .expenseItem {
