@@ -48,14 +48,16 @@ export default {
 .home {
   width: 100vw;
   .homeNav {
+    position: sticky;
+    top: 0;
+    left: 0;
     height: 50px;
     width: 100%;
     border-top: 1px solid #d3d3d3;
     border-bottom: 1px solid #d3d3d3;
     text-align: center;
     line-height: 50px;
-    position: relative;
-
+    background-color: white;
     img {
       width: 30px;
       position: absolute;
@@ -77,7 +79,7 @@ export default {
     flex-wrap: wrap;
 
     li{
-      flex: 0 1 33.33333%;
+      flex: 0 1 33.33%;
       height: 220px;
 
       img {
