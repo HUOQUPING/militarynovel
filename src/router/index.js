@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/BookcityView.vue'
+import BookcityView from '../views/BookcityView/BookcityView.vue'
 import BookshelfView from '../views/BookshelfView.vue'
 import SettingView from '../views/SettingView.vue'
 
@@ -14,8 +14,8 @@ const routes = [
   },
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'bookcity',
+    component: BookcityView
   },
   {
     path: '/setting',

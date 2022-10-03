@@ -1,12 +1,17 @@
 <template>
   <div class="book-city">
-    
+    <BookcitySearch></BookcitySearch>
   </div>
 </template>
 
 <script>
+import BookcitySearch from './BookcitySearch.vue'
+
 export default {
-  name: "HomeView"
+  name: "HomeView",
+  components:{
+    BookcitySearch
+  }
 };
 </script>
 
