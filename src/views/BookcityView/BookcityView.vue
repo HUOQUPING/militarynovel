@@ -1,15 +1,17 @@
 <template>
   <div class="book-city">
-    <BookcitySearch></BookcitySearch>
+    <router-view></router-view>
+    <BookcitySearch>
+      <router-link to="bookcity-search" ></router-link>
+    </BookcitySearch>
   </div>
 </template>
 
 <script>
-import BookcitySearch from './BookcitySearch.vue'
-
+import BookcitySearch from "@/components/BookcitySearch.vue";
 export default {
   name: "HomeView",
-  components:{
+  components: {
     BookcitySearch
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="bookcity-search">
     搜索页面
   </div>
 </template>

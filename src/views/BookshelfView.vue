@@ -47,6 +47,7 @@ export default {
 <style lang="scss" scoped>
 .home {
   width: 100vw;
+  padding-bottom: 50px;
   .homeNav {
     position: sticky;
     top: 0;
@@ -86,6 +87,7 @@ export default {
         width: 100px;
         height: 160px;
         margin: 0 10px;
+        border-radius: 4px;
       }
 
       span {
