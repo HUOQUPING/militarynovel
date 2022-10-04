@@ -1,18 +1,19 @@
 <template>
   <div class="setting">
     <div class="settingNav">设置</div>
-    <div class="loginUser" >
-      <img src="../assets/images/personal_icon.png" alt="用户图片" />
+    <router-view></router-view>
+    <router-link tag="div" class="loginUser" to="/login">
+      <img src="../../assets/images/personal_icon.png" alt="用户图片" />
       <span>点击登录</span>
-    </div>
+    </router-link>
 
     <div class="expenseItem">
       <div class="record">
-       <img src="../assets/images/expend_history.png" alt="消费记录"> 消费记录</div>
+       <img src="../../assets/images/expend_history.png" alt="消费记录"> 消费记录</div>
       <div class="record">
-        <img src="../assets/images/recharge_history.png" alt="充值记录">充值记录</div>
+        <img src="../../assets/images/recharge_history.png" alt="充值记录">充值记录</div>
       <div class="record">
-        <img src="../assets/images/racharge.png" alt="充值">充值</div>
+        <img src="../../assets/images/racharge.png" alt="充值">充值</div>
     </div>
 
     <div class="settingItem">
