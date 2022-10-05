@@ -1,25 +1,31 @@
 <template>
-  <div>
-    <div class="book-city">
-      <div class="search-box">
-        <div class="search">
-          <i class="icon-search"></i>
-          <span>会战</span>
-        </div>
-      </div>
+  <div class="bookcity-search">
+    <div class="search-box">
+      <i class="icon-search"></i>
+      <span>会战</span>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-.search-box {
+<script>
+export default {
+  data() {
+    return {};
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.bookcity-search {
   display: flex;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 7vh;
-  .search {
+  background-color: #fff;
+  z-index: 10;
+  .search-box {
     width: 90vw;
     height: 4vh;
     margin: auto;
