@@ -103,9 +103,9 @@ export default {
     position: relative;
     .carousel-chart {
       position: absolute;
-      top: 10px;
+      top: 50px;
       width: 95vw;
-      height: 18vh;
+      height: 20vh;
     }
     .classification-nav {
       position: absolute;

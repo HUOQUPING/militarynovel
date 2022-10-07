@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <nav ref="nav" v-if="$route.fullPath != '/login'">
+    <nav  v-show="$route.meta.navShow">
       <router-link tag="div" class="nav-item icon-bookshelf" to="/bookshelf">
         <span>书架</span>
       </router-link>
@@ -15,7 +15,13 @@
   </div>
 </template>
 
-
+<script>
+export default {
+  created(){
+    console.log(this.$router);
+  }
+}
+</script>
 
 <style lang="scss">
 nav {

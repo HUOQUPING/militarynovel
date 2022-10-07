@@ -62,15 +62,16 @@ export default {
     margin-top: 10px;
   }
   span {
-    font-size: 18px;
     vertical-align: middle;
+    margin: auto;
+    margin-right: 15px;
   }
 }
 
 .loginContion {
   width: 90vw;
   margin: 5vw;
-  height: 35vh;
+  height: 240px;
 
   .conTop {
     span {
@@ -87,8 +88,8 @@ export default {
     width: 100%;
     border: 1px solid #ccc;
     outline: none;
-    margin-top: 2vh;
-    height: 5vh;
+    margin-top: 10px;
+    height: 37px;
     border-radius: 4px;
     text-indent: 35px;
   }
@@ -112,7 +113,7 @@ export default {
 
   .checkItem {
     font-size: 12px;
-    margin-top: 2vh;
+    margin-top: 10px;
     .checkbox {
       width: 15px;
       height: 15px;
@@ -126,8 +127,8 @@ export default {
 
   .loginBtn {
     width: 100%;
-    height: 6vh;
-    margin-top: 2vh;
+    height: 40px;
+    margin-top: 10px;
     border-radius: 4px;
     background-color: rgb(237, 126, 56);
     color: white;

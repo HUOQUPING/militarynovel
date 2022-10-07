@@ -1,12 +1,20 @@
 <template>
   <div class="book-module">
-    <ul>
-      <li v-for="(t,index) in bookArr.book_infos" :key="t.bookid" :data-id="t.bookid" v-show="index<=3">
-        <img :src="t.coverurl" />
-        <p>{{t.bookname}}</p>
-        <span>{{t.penname}}</span>
-      </li>
-    </ul>
+    <router-view></router-view>
+      <ul>
+        <router-link
+          tag="li"
+          v-for="(t,index) in bookArr.book_infos"
+          :key="t.bookid"
+          :data-id="t.bookid"
+          v-show="index<=3"
+          :to="'/bookinfo?id='+t.bookid"
+        >
+          <img :src="t.coverurl" />
+          <p>{{t.bookname}}</p>
+          <span>{{t.penname}}</span>
+        </router-link>
+      </ul>
   </div>
 </template>
 
@@ -14,13 +22,11 @@
 export default {
   data() {
     return {
-        books:[]
+      
     };
   },
   props: ["bookArr"],
-  created() {
-
-  },
+  created() {},
   methods: {
 
   }
