@@ -16,18 +16,10 @@ export default {
   data() {
     return {
       index: 0,
-      // timer: null,
     };
   },
   props: ["imgArr"],
-  // computed: {
-  //   groupStyle() {
-  //     return {
-  //       left: `${-this.index * 100}%`,
-  //       transition: "left .5s linear",
-  //     };
-  //   },
-  // },
+
   methods: {
     autoPlay() {
       setInterval(() => {
