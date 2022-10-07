@@ -1,7 +1,10 @@
 <template>
   <div class="carousel">
-    <transition-group class="container" tag="ul" name="move">
-      <li v-for="t in imgArr[9].book_infos" :key="t.bookid">
+    <transition-group class="container" tag="ul" ref="ul">
+      <li
+        v-for="t in imgArr[9].book_infos.concat(imgArr[9].book_infos[0])"
+        :key="t.bookid"
+      >
         <img :src="t.coverurl" />
       </li>
     </transition-group>
@@ -12,12 +15,44 @@
 export default {
   data() {
     return {
-      
+      index: 0,
+      // timer: null,
     };
   },
   props: ["imgArr"],
-  methods: {},
-  mounted() {}
+  // computed: {
+  //   groupStyle() {
+  //     return {
+  //       left: `${-this.index * 100}%`,
+  //       transition: "left .5s linear",
+  //     };
+  //   },
+  // },
+  methods: {
+    autoPlay() {
+      setInterval(() => {
+        let self =this
+        this.index++;
+        this.$refs.ul.$el.style.left = `${-this.index * 100}%`;
+        this.$refs.ul.$el.style.transition = "left .5s linear";
+        if (
+          this.index ==
+          this.imgArr[9].book_infos.concat(this.imgArr[9].book_infos[0]).length - 1
+        ) {
+          this.index = 0
+          this.$refs.ul.$el.ontransitionend = function () {
+            self.$refs.ul.$el.style.transition = "none";
+            self.$refs.ul.$el.style.left = "0";
+            self.$refs.ul.$el.ontransitionend = null
+          };
+         
+        }
+      }, 1000);
+    },
+  },
+  mounted() {
+    this.autoPlay();
+  },
 };
 </script>
 
@@ -38,6 +73,8 @@ export default {
 
 .carousel ul li {
   float: left;
+  width: 10%;
+  height: 26vh;
 }
 
 .carousel ul li img {

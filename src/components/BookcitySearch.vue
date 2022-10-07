@@ -37,7 +37,7 @@ export default {
     &.icon-search {
       width: 14px;
       height: 14px;
-      background-image: url();
+      // background-image: url();
     }
     span {
       color: #999;
