@@ -1,5 +1,5 @@
 <template>
-  <div class="strip-module">
+  <div class="strip-module" v-if="bookArr != null">
     <router-view></router-view>
     <ul>
       <router-link tag="li"  v-for="(t,i) in bookArr.book_infos" :key="(t.bookid + i)" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid">
@@ -23,9 +23,6 @@ export default {
     };
   },
   props: ["bookArr"],
-  mounted(){
-    console.log(this.bookArr);
-  }
 };
 </script>
 

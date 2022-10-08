@@ -1,5 +1,5 @@
 <template>
-  <div class="book-module">
+  <div class="book-module" v-if="bookArr != null">
     <router-view></router-view>
       <ul>
         <router-link

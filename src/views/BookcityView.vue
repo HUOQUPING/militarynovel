@@ -76,7 +76,7 @@ export default {
     bookModule,
     StripModule
   },
-  created() {
+  mounted() {
     this.getData();
   },
   methods: {
