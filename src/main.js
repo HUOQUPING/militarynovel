@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import VueAxiosPlugin from 'vue-axios-plugin'
 
+
 Vue.use(VueAxiosPlugin, {
   // 请求拦截处理
   reqHandleFunc: config => config,

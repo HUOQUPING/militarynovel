@@ -20,27 +20,9 @@
 export default {
   data(){
     return {
-        bookArr:[]
+        bookArr:JSON.parse(localStorage.getItem("bookArr")) ?? []
     } 
   },
-
-  created(){
-    this.getData()
-  },
-  methods:{
-     getData(){
-       this.$axios
-       .get('./json/bookCity.json')
-       .then(({data}) => {
-         data.homeparts.forEach(el => {
-           el.book_infos.forEach(book => {
-             this.bookArr.push(book)
-           })
-         });
-       })
-    },
-  }
-
 }
 </script>
 

@@ -5,6 +5,7 @@ import BookshelfView from '../views/BookshelfView.vue'
 import SettingView from '../views/SettingView/SettingView.vue'
 import LoginView from '../views/SettingView/LoginView.vue'
 import BookInfo from "../views/BookInfo.vue";
+import RegisterView from "../views/SettingView/RegisterView.vue"
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,14 @@ const routes = [
     path: '/bookinfo',
     name: 'bookinfo',
     component: BookInfo,
+    meta: {
+      navShow: false
+    },
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterView,
     meta: {
       navShow: false
     },

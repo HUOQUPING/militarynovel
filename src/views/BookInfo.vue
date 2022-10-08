@@ -68,7 +68,8 @@ export default {
   data() {
     return {
       bookinfo: [],
-      showAll: false
+      showAll: false,
+      obj:[]
     };
   },
   components: {
@@ -104,15 +105,14 @@ export default {
           return;
         }
       }
-      let obj = {
+      this.obj.push({
         bookid: bookid,
         coverurl: coverurl,
         bookname: bookname,
         bookstatename: bookstatename
-      };
-      obj = JSON.stringify(obj);
-      let timestamp = new Date().getTime();
-      localStorage.setItem(timestamp, obj);
+      });
+      this.obj = JSON.stringify(this.obj);
+      localStorage.setItem("bookArr", this.obj);
     },
   }
 };

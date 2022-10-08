@@ -11,7 +11,7 @@
 
     <div class="loginContion">
       <p class="conTop">
-        <span>使用铁血账号登录</span> <span>快速注册>></span>
+        <span>使用铁血账号登录</span> <span @click="goregister">快速注册>></span>
       </p>
       <p>
         <img src="../../assets/images/user.svg" alt="用户" />
@@ -19,15 +19,23 @@
       </p>
       <p>
         <img src="../../assets/images/password.svg" alt="密码" />
-        <input type="text" class="passwordInp" placeholder="输入正确密码" />
+        <input
+          type="password"
+          class="passwordInp"
+          placeholder="输入正确密码"
+          ref="psd"
+        />
       </p>
       <p>
         <img src="../../assets/images/password.svg" alt="验证码" />
         <input type="text" class="verificationCode" placeholder="验证码" />
+        <canvas id="captcha" class="captcha" ref="captcha"></canvas>
+        <span @click="clickCap">换一张</span>
       </p>
 
       <p class="checkItem">
-        <input type="checkbox" class="checkbox" /> <span>显示密码</span>
+        <input type="checkbox" class="checkbox" @click="showPsd" />
+        <span>显示密码</span>
       </p>
       <button class="loginBtn">登录</button>
     </div>
@@ -35,14 +43,51 @@
 </template>
 
 <script>
+import CaptchaMini from "captcha-mini";
 export default {
   data() {
-    return {};
+    return {
+      showPsdStatus: false,
+    };
   },
-  created() {},
+  mounted() {
+    this.initCaptcha()
+  },
   methods: {
     comeback() {
       this.$router.replace("/setting");
+    },
+    goregister(){
+      this.$router.replace("/register")
+    },
+    showPsd() {
+      this.showPsdStatus = !this.showPsdStatus;
+      if (this.showPsdStatus) {
+        this.$refs.psd.type = "text";
+      } else {
+        this.$refs.psd.type = "password";
+      }
+    },
+    initCaptcha() {
+      var captcha = new CaptchaMini({
+        lineWidth: 5, //线条宽度
+        lineNum: 6, //线条数量
+        dotR: 2, //点的半径
+        dotNum: 25, //点的数量
+        preGroundColor: [10, 80], //前景色区间
+        backGroundColor: [150, 250], //背景色区间
+        fontSize: 60, //字体大小
+        fontFamily: ["Georgia", "微软雅黑", "Helvetica", "Arial"], //字体类型
+        fontStyle: "stroke", //字体绘制方法，有fill和stroke
+        content: "ABCDEFGHJKLMNOPQRSTUVWXYZ234567890", //验证码内容
+        length: 4, //验证码长度
+      });
+      captcha.draw(this.$refs.captcha, (r) => {
+        this.captcha = r; // 可通过 this.captcha 使用当前验证码（校验用户输入对否等）
+      });
+    },
+    clickCap(){
+      this.$refs.captcha.click()
     },
   },
 };
@@ -105,6 +150,10 @@ export default {
       top: 23px;
       left: 10px;
     }
+
+    span {
+      font-size: 12px;
+    }
   }
 
   .verificationCode {
@@ -139,5 +188,12 @@ export default {
       background-color: #d4cccc;
     }
   }
+}
+
+.captcha {
+  width: 100px;
+  height: 41px;
+  vertical-align: middle;
+  margin: 0 10px;
 }
 </style>
