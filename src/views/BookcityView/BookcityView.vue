@@ -4,7 +4,7 @@
       <!-- 搜索框 -->
       <BookcitySearch class="bookcity-search"></BookcitySearch>
       <!-- 轮播图 -->
-      <CarouselChart class="carousel-chart" :imgArr="bookArr"></CarouselChart>
+      <CarouselChart  class="carousel-chart" :imgArr="bookArr"></CarouselChart>
       <!-- 分类 -->
       <ClassificationNav class="classification-nav"></ClassificationNav>
     </div>
@@ -13,17 +13,17 @@
       <!-- 今日热推 -->
       <div class="hot-today">
         <h3>今日热推</h3>
-        <bookModule :bookArr="bookArr[0]"></bookModule>
+        <bookModule  :bookArr="bookArr[0]"></bookModule>
       </div>
       <!-- 本周强推 -->
       <div class="push-thisWeek">
         <h3>本周强推</h3>
-        <bookModule :bookArr="bookArr[1]"></bookModule>
+        <bookModule  :bookArr="bookArr[1]"></bookModule>
       </div>
       <!-- 24小时热销 -->
       <div class="hot-in24Hours">
         <h3>24小时热销</h3>
-        <StripModule :bookArr="bookArr[2]"></StripModule>
+        <StripModule  :bookArr="bookArr[2]" ></StripModule>
       </div>
       <!-- 经典全本 -->
       <div class="classic-complete">
@@ -33,22 +33,22 @@
       <!-- 军事小说 -->
       <div class="military-novel">
         <h3>军事小说</h3>
-        <StripModule :bookArr="bookArr[5]"></StripModule>
+        <StripModule  :bookArr="bookArr[5]" ></StripModule>
       </div>
       <!-- 历史小说 -->
       <div class="historical-novel">
         <h3>历史小说</h3>
-        <StripModule :bookArr="bookArr[6]"></StripModule>
+        <StripModule  :bookArr="bookArr[6]" ></StripModule>
       </div>
       <!-- 潜力新书 -->
       <div class="new-potentialbook">
         <h3>潜力新书</h3>
-        <StripModule :bookArr="bookArr[7]"></StripModule>
+        <StripModule :bookArr="bookArr[7]" ></StripModule>
       </div>
       <!-- 更多爽文 -->
       <div class="moreCool-articles">
         <h3>更多爽文</h3>
-        <StripModule :bookArr="bookArr[8]"></StripModule>
+        <StripModule  :bookArr="bookArr[8]" ></StripModule>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@ export default {
   name: "HomeView",
   data() {
     return {
-      bookArr: []
+      bookArr: [],
     };
   },
   components: {
@@ -76,7 +76,7 @@ export default {
     bookModule,
     StripModule
   },
-  created() {
+  mounted() {
     this.getData();
   },
   methods: {
@@ -103,9 +103,9 @@ export default {
     position: relative;
     .carousel-chart {
       position: absolute;
-      top: 10px;
-      width: 100vw;
-      height: 26vh;
+      top: 50px;
+      width: 95vw;
+      height: 20vh;
     }
     .classification-nav {
       position: absolute;

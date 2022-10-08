@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel" v-if="imgArr != null">
+  <div class="carousel" >
     <transition-group class="container" tag="ul" ref="ul" >
       <li
         v-for="(t,i) in imgArr[9].book_infos.concat(imgArr[9].book_infos[0])"
