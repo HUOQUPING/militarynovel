@@ -2,8 +2,8 @@
   <div class="carousel">
     <transition-group class="container" tag="ul" ref="ul">
       <li
-        v-for="t in imgArr[9].book_infos.concat(imgArr[9].book_infos[0])"
-        :key="t.bookid"
+        v-for="(t,i) in imgArr[9].book_infos.concat(imgArr[9].book_infos[0])"
+        :key="i"
       >
         <img :src="t.coverurl" />
       </li>
@@ -16,13 +16,14 @@ export default {
   data() {
     return {
       index: 0,
+      timer:null
     };
   },
   props: ["imgArr"],
 
   methods: {
     autoPlay() {
-      setInterval(() => {
+     this.timer = setInterval(() => {
         let self =this
         this.index++;
         this.$refs.ul.$el.style.left = `${-this.index * 100}%`;
@@ -45,6 +46,11 @@ export default {
   mounted() {
     this.autoPlay();
   },
+  beforeDestroy(){
+    if(this.timer){
+      clearInterval(this.timer)
+    }
+  }
 };
 </script>
 

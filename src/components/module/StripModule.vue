@@ -2,7 +2,7 @@
   <div class="strip-module">
     <router-view></router-view>
     <ul>
-      <router-link tag="li" v-for="t in bookArr.book_infos" :key="t.bookid" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid">
+      <router-link tag="li"  v-for="(t,i) in bookArr.book_infos" :key="(t.bookid + i)" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid">
       <!-- <li v-for="t in bookArr.book_infos" :key="t.bookid" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid"> -->
         <img :src="t.coverurl" />
         <div class="text">
@@ -19,9 +19,13 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+    };
   },
-  props: ["bookArr"]
+  props: ["bookArr"],
+  mounted(){
+    console.log(this.bookArr);
+  }
 };
 </script>
 
