@@ -17,7 +17,7 @@
       </div>
       <!-- 本周强推 -->
       <div class="push-thisWeek">
-        <h3>本周强推</h3>
+        <h3>本周强推<span @click="moreBook(2)">查看更多</span></h3>
         <bookModule  :bookArr="bookArr[1]"></bookModule>
       </div>
       <!-- 24小时热销 -->
@@ -27,27 +27,27 @@
       </div>
       <!-- 经典全本 -->
       <div class="classic-complete">
-        <h3>经典全本</h3>
+        <h3>经典全本<span @click="moreBook(4)">查看更多</span></h3>
         <bookModule :bookArr="bookArr[3]"></bookModule>
       </div>
       <!-- 军事小说 -->
       <div class="military-novel">
-        <h3>军事小说</h3>
+        <h3>军事小说<span @click="moreBook(6)">查看更多</span></h3>
         <StripModule  :bookArr="bookArr[5]" ></StripModule>
       </div>
       <!-- 历史小说 -->
       <div class="historical-novel">
-        <h3>历史小说</h3>
+        <h3>历史小说<span @click="moreBook(7)">查看更多</span></h3>
         <StripModule  :bookArr="bookArr[6]" ></StripModule>
       </div>
       <!-- 潜力新书 -->
       <div class="new-potentialbook">
-        <h3>潜力新书</h3>
+        <h3>潜力新书<span @click="moreBook(8)">查看更多</span></h3>
         <StripModule :bookArr="bookArr[7]" ></StripModule>
       </div>
       <!-- 更多爽文 -->
       <div class="moreCool-articles">
-        <h3>更多爽文</h3>
+        <h3>更多爽文<span @click="moreBook(9)">查看更多</span></h3>
         <StripModule  :bookArr="bookArr[8]" ></StripModule>
       </div>
     </div>
@@ -82,14 +82,15 @@ export default {
   },
   methods: {
     getData() {
-      // '/htm/defaultnew.htm?ver=260&from=1'
-      // "./json/bookCity.json"
       this.$axios.get('/htm/defaultnew.htm?ver=260&from=1').then(({ data }) => {
         data.homeparts.forEach(el => {
           this.bookArr.push(el);
         });
         this.flag = true
       });
+    },
+    moreBook(num){
+      this.$router.replace(`/more?type=${num}`)
     }
   },
 
@@ -126,7 +127,14 @@ export default {
     h3 {
       font-size: 19px;
       font-weight: 700;
-      padding: 16px 0px 12px 14px;
+      padding: 16px 0px 12px 10px;
+
+      span{
+        font-size: 14px;
+        float: right;
+        margin-right: 10px;
+        color: rgb(237, 126, 56);
+      }
     }
     div {
       margin: 8px auto;

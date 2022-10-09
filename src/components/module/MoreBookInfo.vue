@@ -2,13 +2,15 @@
   <div class="strip-module" v-if="bookArr != null">
     <router-view></router-view>
     <ul>
-      <router-link tag="li"  v-for="(t,i) in bookArr.book_infos" :key="i" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid">
+      <router-link tag="li"  v-for="(t,i) in bookArr.bookinfos" :key="i" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid">
+      <!-- <li v-for="t in bookArr.book_infos" :key="t.bookid" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid"> -->
         <img :src="t.coverurl" />
         <div class="text">
           <h3>{{t.bookname}}</h3>
           <p>{{t.summary}}</p>
           <span>{{t.penname}}·{{t.bookkindname}}·点击:{{t.viewcount > 10000 ? (t.viewcount/10000).toFixed(1)+'万' : t.viewcount}}·{{t.bookstatename}}</span>
         </div>
+      <!-- </li> -->
       </router-link>
     </ul>
   </div>
