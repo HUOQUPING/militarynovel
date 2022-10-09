@@ -30,9 +30,9 @@ nav {
   left: 0;
   bottom: 0;
   width: 100vw;
-  height: 50px;
+  height: 55px;
   text-align: center;
-  line-height: 70px;
+  line-height: 80px;
   box-shadow: 0px 2px 5px black;
   background-color: white;
   .nav-item {
