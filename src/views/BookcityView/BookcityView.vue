@@ -77,12 +77,14 @@ export default {
     bookModule,
     StripModule
   },
-  mounted() {
+  created() {
     this.getData();
   },
   methods: {
     getData() {
-      this.$axios.get("./json/bookCity.json").then(({ data }) => {
+      // '/htm/defaultnew.htm?ver=260&from=1'
+      // "./json/bookCity.json"
+      this.$axios.get('/htm/defaultnew.htm?ver=260&from=1').then(({ data }) => {
         data.homeparts.forEach(el => {
           this.bookArr.push(el);
         });
