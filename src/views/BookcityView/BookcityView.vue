@@ -106,8 +106,10 @@ export default {
     .carousel-chart {
       position: absolute;
       top: 50px;
-      width: 100vw;
+      width: 94vw;
       height: 20vh;
+      margin: 0 3vw;
+      border-radius: 8px;
     }
     .classification-nav {
       position: absolute;

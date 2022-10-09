@@ -1,7 +1,7 @@
 <template>
-  <div class="book-info">
+  <div class="book-info" >
     <!-- TODO:回退键 -->
-    <div class="back-btn">
+    <div class="back-btn" >
       <img src="../assets/images/back_black.png" alt="返回" @click="back()" />
       <p>{{bookinfo[0].bookname}}</p>
     </div>
@@ -69,7 +69,7 @@ export default {
     return {
       bookinfo: [],
       showAll: false,
-      obj:[]
+      obj:[],
     };
   },
   components: {

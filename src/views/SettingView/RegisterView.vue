@@ -193,7 +193,7 @@ export default {
 }
 
 .captcha {
-  width: 100px;
+  width: 80px;
   height: 41px;
   vertical-align: middle;
   margin: 0 10px;

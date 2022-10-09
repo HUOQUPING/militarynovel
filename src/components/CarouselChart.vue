@@ -78,6 +78,7 @@ export default {
 .carousel ul li img {
   display: block;
   width: 100%;
+  height: 26vh;
 }
 
 .buffer {
