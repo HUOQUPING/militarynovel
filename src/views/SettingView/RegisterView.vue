@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     comeback() {
-      this.$router.replace("/login");
+      this.$router.back();
     },
     showPsd() {
       this.showPsdStatus = !this.showPsdStatus;

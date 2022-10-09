@@ -25,7 +25,7 @@ export default {
   },
   methods:{
      gosearch(){
-     this.$router.replace("/booksearchword");
+     this.$router.push("/booksearchword");
      }
      
   }

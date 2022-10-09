@@ -2,7 +2,7 @@
   <div class="bookcity-search">
     <div class="Version-center">
       <div class="search-header">
-        <img src="../../assets/images/back_black.png" alt=""  @click="comeback" />
+        <img src="../../assets/images/back_black.png" alt="" @click="comeback"/>
         <input type="text" placeholder="搜索感兴趣的内容" />
         <span>搜索</span>
       </div>
@@ -35,12 +35,11 @@ export default {
     this.getData();
   },
   methods: {
-    comeback() {
-      // this.$router.go(-1);
+    comeback(){
+      this.$router.back()
     },
     getData() {
       this.$axios.get("/book/HotWords.aspx?ver=260&from=1").then(({ data }) => {
-        console.log(data);
         this.wordsArr = data;
       });
     },

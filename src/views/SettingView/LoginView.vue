@@ -55,10 +55,10 @@ export default {
   },
   methods: {
     comeback() {
-      this.$router.go(-1)
+      this.$router.back()
     },
     goregister(){
-      this.$router.replace("/register")
+      this.$router.push("/register")
     },
     showPsd() {
       this.showPsdStatus = !this.showPsdStatus;
