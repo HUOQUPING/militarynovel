@@ -29,7 +29,7 @@ export default {
       return new Date(time).getFullYear()+"-"+this.tenPlusZero(new Date(time).getMonth())+"-"+this.tenPlusZero(new Date(time).getDay())+" "+this.tenPlusZero(new Date(time).getHours())+":"+this.tenPlusZero(new Date(time).getMinutes())
     },
     tenPlusZero(num){
-        return num > 10 ? num : '0'+num
+        return num >= 10 ? num : '0'+num
     }
   }
 };
