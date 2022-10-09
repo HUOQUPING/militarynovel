@@ -1,9 +1,9 @@
 <template>
-  <div class="book-info">
-    <div v-show="bookinfo[0].ret == 0">
-      <div class="back-btn" :class="{ bgcolor : isShow }">
+  <div class="book-info" v-if="flag == true">
+    <div v-if="bookinfo[0].ret == 0">
+      <div class="back-btn" :class="{ bgcolor: isShow }">
         <img src="../assets/images/back_white.png" alt="返回" @click="back()" />
-        <p v-show="isShow">{{bookinfo[0].bookname}}</p>
+        <p v-show="isShow">{{ bookinfo[0].bookname }}</p>
         <img src="../assets/images/share.png" alt="返回" @click="back()" />
       </div>
       <!-- 毛玻璃以及书本简介 -->
@@ -13,15 +13,17 @@
           <img :src="bookinfo[0].coverurl" />
         </div>
         <div class="book-name">
-          <h3>{{bookinfo[0].bookname}}</h3>
-          <p>作者:{{bookinfo[0].penname}}</p>
-          <span>状态:{{bookinfo[0].bookstatename}}</span>
+          <h3>{{ bookinfo[0].bookname }}</h3>
+          <p>作者:{{ bookinfo[0].penname }}</p>
+          <span>状态:{{ bookinfo[0].bookstatename }}</span>
         </div>
       </div>
       <!-- 简介 -->
       <div class="details">
-        <p class="summary" :class="showAll ? 'active' : ''">{{bookinfo[0].summary}}</p>
-        <p class="split-line" @click="showAll=!showAll" v-show="!showAll">
+        <p class="summary" :class="showAll ? 'active' : ''">
+          {{ bookinfo[0].summary }}
+        </p>
+        <p class="split-line" @click="showAll = !showAll" v-show="!showAll">
           <span class="arrow">v</span>
         </p>
       </div>
@@ -36,35 +38,52 @@
         <div class="latestChapter">
           <h3>最新章节</h3>
           <ul>
-            <li v-for="t in bookinfo[0].chapters" :key="t.chapterid">{{t.chaptername}}</li>
+            <li v-for="t in bookinfo[0].chapters" :key="t.chapterid">
+              {{ t.chaptername }}
+            </li>
           </ul>
         </div>
       </div>
       <!-- 相关推荐 -->
       <div class="related-recommendations">
         <h3>相关推荐</h3>
-        <RecommendedModule class="recommended-module" :recommendList="bookinfo[0].recommend_list"></RecommendedModule>
+        <RecommendedModule
+          class="recommended-module"
+          :recommendList="bookinfo[0].recommend_list"
+        ></RecommendedModule>
       </div>
       <!-- 评论 -->
       <div class="comment-box">
         <h3>评论</h3>
-        <CommentModule class="comment" :commentList="bookinfo[0].comment_list"></CommentModule>
+        <CommentModule
+          class="comment"
+          :commentList="bookinfo[0].comment_list"
+        ></CommentModule>
       </div>
 
       <!-- 按钮 -->
       <div class="btn-box">
         <div
-          @click="addToBookshelf(bookinfo[0].bookid,bookinfo[0].coverurl,bookinfo[0].bookname,bookinfo[0].bookstatename)"
-        >加入书架</div>
+          @click="
+            addToBookshelf(
+              bookinfo[0].bookid,
+              bookinfo[0].coverurl,
+              bookinfo[0].bookname,
+              bookinfo[0].bookstatename
+            )
+          "
+        >
+          加入书架
+        </div>
         <div class="readding">开始阅读</div>
         <div>购买章节</div>
       </div>
     </div>
-    <div class="copyright-issues" v-show="bookinfo[0].ret == 1">
-      <div class="back-btn" :class="{ bgcolor : isShow }">
+    <div class="copyright-issues" v-if="bookinfo[0].ret == 1">
+      <div class="back-btn" :class="{ bgcolor: isShow }">
         <img src="../assets/images/back_black.png" alt="返回" @click="back()" />
       </div>
-      <div class="text-box">{{bookinfo[0].msg}}</div>
+      <div class="text-box">{{ bookinfo[0].msg }}</div>
     </div>
   </div>
 </template>
@@ -78,28 +97,26 @@ export default {
       bookinfo: [],
       showAll: false,
       isShow: false,
-      obj: []
+      obj: [],
+      flag: false,
     };
   },
   components: {
     RecommendedModule,
-    CommentModule
+    CommentModule,
   },
   created() {
     this.getInfo(this.$route.query.id);
   },
   methods: {
-    // getInfo(id) {
-    //   this.$axios.get(`./json/bookid${id}.json`).then(({ data }) => {
-    //     // console.log(data);
-    //     this.bookinfo.push(data);
-    //   });
-    // },
     getInfo(id) {
-      this.$axios.get(`/book/ReadBookDetail.aspx?ver=200&from=1&bookid=${id}`).then( ({ data })  => {
-        console.log(data);
-        this.bookinfo.push(data);
-      });
+      this.$axios
+        .get(`/book/ReadBookDetail.aspx?ver=200&from=1&bookid=${id}`)
+        .then(({ data }) => {
+          console.log(data);
+          this.bookinfo.push(data);
+          this.flag = true;
+        })
     },
     // 返回
     back() {
@@ -107,38 +124,33 @@ export default {
     },
     // 存入本地存储
     addToBookshelf(bookid, coverurl, bookname, bookstatename) {
-      this.obj = [];
+      // this.obj = [];
       // 比对本地存储是否已经拥有此书
       let bookArr = JSON.parse(localStorage.getItem("bookArr"));
-      if (bookArr) {
-        for (let index = 0; index < bookArr.length; index++) {
-          console.log(bookArr);
-        }
-      }
-      /*      
-      bookid: bookid,
-      coverurl: coverurl,
-      bookname: bookname,
-      bookstatename: bookstatename 
 
-      this.obj.push({
-        bookid: bookid,
-        coverurl: coverurl,
-        bookname: bookname,
-        bookstatename: bookstatename
-      }); 
-     */
-      let obj = [
-        {
+      if (bookArr) {
+        for(let i = 0; i < bookArr.length; i++){
+          if(bookArr[i].bookid == bookid){
+            alert('存在')
+            return
+          }
+        }
+        bookArr.push({
+           bookid: bookid,
+          coverurl: coverurl,
+          bookname: bookname,
+          bookstatename: bookstatename,
+        })
+        localStorage.setItem("bookArr", JSON.stringify(bookArr));
+      } else {
+        this.obj.push({
           bookid: bookid,
           coverurl: coverurl,
           bookname: bookname,
-          bookstatename: bookstatename
-        }
-      ];
-
-      // localStorage.setItem("bookArr", JSON.stringify(this.obj));
-      localStorage.setItem("bookArr", JSON.stringify(obj));
+          bookstatename: bookstatename,
+        });
+        localStorage.setItem("bookArr", JSON.stringify(this.obj));
+      }
     },
     isScroll() {
       const top = document.documentElement.scrollTop;
@@ -148,14 +160,14 @@ export default {
       } else {
         this.isShow = false;
       }
-    }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.isScroll);
   },
   unmounted() {
     window.removeEventListener("scroll", this.isScroll);
-  }
+  },
 };
 </script>
 
@@ -190,7 +202,6 @@ export default {
     color: #fff;
     background-color: #f29a2f;
   }
-
   // 毛玻璃
   .ground-glass {
     position: relative;
@@ -236,7 +247,6 @@ export default {
       }
     }
   }
-
   //   简介
   .details {
     margin: 12px 0;
@@ -270,7 +280,6 @@ export default {
       display: block;
     }
   }
-
   //   目录及最新章节
   .catalogues {
     .catalogues-box {
@@ -297,14 +306,12 @@ export default {
       }
     }
   }
-
   // 相关推荐
   .related-recommendations {
     h3 {
       padding: 1.5vh 4vw;
     }
   }
-
   // 评论
   .comment-box {
     .comment {
@@ -312,7 +319,6 @@ export default {
       padding: 1.5vh 4vw;
     }
   }
-
   // 按钮
   .btn-box {
     position: sticky;

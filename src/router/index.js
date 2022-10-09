@@ -6,6 +6,7 @@ import SettingView from '../views/SettingView/SettingView.vue'
 import LoginView from '../views/SettingView/LoginView.vue'
 import BookInfo from "../views/BookInfo.vue";
 import RegisterView from "../views/SettingView/RegisterView.vue"
+import MoreBook from "../views/BookcityView/MoreBook.vue"
 
 Vue.use(VueRouter)
 
@@ -54,6 +55,14 @@ const routes = [
     path: '/register',
     name: 'register',
     component: RegisterView,
+    meta: {
+      navShow: false
+    },
+  },
+  {
+    path: '/more',
+    name: 'more',
+    component: MoreBook,
     meta: {
       navShow: false
     },
