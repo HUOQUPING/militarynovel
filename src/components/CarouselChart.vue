@@ -45,7 +45,6 @@ export default {
   },
   mounted() {
     this.autoPlay();
-    console.log(this.imgArr);
   },
   beforeDestroy(){
     if(this.timer){

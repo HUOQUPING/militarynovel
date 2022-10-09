@@ -4,7 +4,7 @@
       <!-- 搜索框 -->
       <BookcitySearch class="bookcity-search"></BookcitySearch>
       <!-- 轮播图 -->
-      <CarouselChart  class="carousel-chart" :imgArr="bookArr"></CarouselChart>
+      <CarouselChart  class="carousel-chart" :imgArr="bookArr" v-if="flag == true"></CarouselChart>
       <!-- 分类 -->
       <ClassificationNav class="classification-nav"></ClassificationNav>
     </div>
@@ -67,6 +67,7 @@ export default {
   data() {
     return {
       bookArr: [],
+      flag:false
     };
   },
   components: {
@@ -85,6 +86,7 @@ export default {
         data.homeparts.forEach(el => {
           this.bookArr.push(el);
         });
+        this.flag = true
       });
     }
   }
