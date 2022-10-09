@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     comeback() {
-      this.$router.replace("/setting");
+      this.$router.go(-1)
     },
     goregister(){
       this.$router.replace("/register")

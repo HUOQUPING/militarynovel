@@ -1,8 +1,8 @@
 <template>
   <div class="bookcity-search">
-    <div class="search-box">
+    <div class="search-box" @click="gosearch">
       <i class="icon-search"></i>
-      <span>会战</span>
+      <span>搜索感兴趣的内容</span>
     </div>
   </div>
 </template>
@@ -11,7 +11,12 @@
 export default {
   data() {
     return {};
-  }
+  },
+   methods:{
+     gosearch(){
+     this.$router.replace('/booksearchword');
+     }
+   }
 };
 </script>
 

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import BookcitySearch from '../views/BookcityView/BookcitySearchword.vue'
 import BookcityView from '../views/BookcityView/BookcityView.vue'
 import BookshelfView from '../views/BookshelfView.vue'
 import SettingView from '../views/SettingView/SettingView.vue'
@@ -10,6 +11,14 @@ import RegisterView from "../views/SettingView/RegisterView.vue"
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/booksearchword',
+    name:'booksearchword',
+    component:BookcitySearch,
+    meta:{
+      navShow:false
+    }
+  },
   {
     path: '/bookshelf',
     name: 'bookshelf',
@@ -61,7 +70,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

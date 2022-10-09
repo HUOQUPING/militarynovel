@@ -2,7 +2,7 @@
   <div class="home">
     <div class="homeNav">
       <span>书架</span>
-      <img src="../assets/images/svg_search.png" alt="搜索" />
+      <img src="../assets/images/svg_search.png" alt="搜索" @click="gosearch" />
       <img src="../assets/images/svg_edit.png" alt="修改" />
     </div>
 
@@ -23,6 +23,12 @@ export default {
         bookArr:JSON.parse(localStorage.getItem("bookArr")) ?? []
     } 
   },
+  methods:{
+     gosearch(){
+     this.$router.replace("/booksearchword");
+     }
+     
+  }
 }
 </script>
 
