@@ -101,7 +101,7 @@ export default {
 .book-city {
   width: 100vw;
   padding-bottom: 50px;
-  background-color: #d3d3d3;
+  background-color: rgb(241,237,237);
   .header {
     width: 100%;
     height: 40vh;

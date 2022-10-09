@@ -55,6 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .carousel {
   position: relative;
   width: 400px;
@@ -84,4 +85,6 @@ export default {
 .buffer {
   transition: left 0.3s;
 }
+
+
 </style>

@@ -9,11 +9,18 @@
 
     <div class="expenseItem">
       <div class="record">
-       <img src="../../assets/images/expend_history.png" alt="消费记录"> 消费记录</div>
+        <img src="../../assets/images/expend_history.png" alt="消费记录" />
+        消费记录
+      </div>
       <div class="record">
-        <img src="../../assets/images/recharge_history.png" alt="充值记录">充值记录</div>
+        <img
+          src="../../assets/images/recharge_history.png"
+          alt="充值记录"
+        />充值记录
+      </div>
       <div class="record">
-        <img src="../../assets/images/racharge.png" alt="充值">充值</div>
+        <img src="../../assets/images/racharge.png" alt="充值" />充值
+      </div>
     </div>
 
     <div class="settingItem">
@@ -56,9 +63,8 @@
     span {
       font-size: 20px;
       vertical-align: middle;
-      color: rgb(237,126,56);
+      color: rgb(237, 126, 56);
     }
-
   }
 
   .expenseItem {
@@ -70,7 +76,7 @@
     background-color: white;
 
     .record {
-      flex:  1;
+      flex: 1;
       display: flex;
       flex-direction: column;
       text-align: center;
@@ -88,7 +94,7 @@
 
       &:active {
         background-color: #d4cccc;
-    }
+      }
     }
   }
 
@@ -113,14 +119,13 @@
 
       &:active {
         background-color: #d4cccc;
-    }
+      }
     }
 
-    & >div:nth-child(5){
+    & > div:nth-child(5) {
       border-bottom: 0px;
     }
-
-    
   }
 }
+
 </style>
