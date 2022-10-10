@@ -40,7 +40,8 @@ export default {
           console.log(data);
           this.bookArr = data;
         });
-    }
+    },
+    
   }
 };
 </script>
