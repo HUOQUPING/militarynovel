@@ -2,7 +2,7 @@
   <div class="login">
     <div class="loginNav">
       <img
-        src="../../assets/images/leftarrow.svg"
+        src="../../assets/images/back_black.png"
         alt="返回"
         @click="comeback"
       />

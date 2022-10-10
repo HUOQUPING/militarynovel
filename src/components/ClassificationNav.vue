@@ -23,7 +23,7 @@ export default {
   methods: {
     moreBook(num){
       this.$router.push(`/more?type=${num}`)
-    }
+    },
   }
 };
 </script>

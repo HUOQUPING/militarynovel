@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="nav">
-      <img src="../../assets/images/leftarrow.svg" alt="返回" @click="comeback" />
+      <img src="../../assets/images/back_black.png" alt="返回" @click="comeback" />
       <span>{{ title }}</span>
     </div>
     <div>
@@ -61,6 +61,8 @@ export default {
   align-items: center;
   img {
     display: block;
+    width: 28px;
+    padding-left: 5px;
   }
   span {
     flex: 1;
