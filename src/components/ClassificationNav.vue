@@ -1,10 +1,10 @@
 <template>
   <div class="classification-nav">
-      <div class="book-over">
-        <span @click="moreBook(22)">完本</span>
+      <div class="book-over" @click="moreBook(22)">
+        <span>完本</span>
       </div>
-    <div class="book-free">
-      <span @click="moreBook(21)">免费</span>
+    <div class="book-free"  @click="moreBook(21)">
+      <span>免费</span>
     </div>
     <div class="book-rank">
       <span>排行</span>
