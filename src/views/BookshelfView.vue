@@ -7,7 +7,7 @@
     </div>
 
     <ul class="bookList">
-        <li v-for="n in bookArr" :key="n.bookid">
+        <li v-for="n in bookArr" :key="n.bookid" @click="gobookInfo(n.bookid)">
           <img :src="n.coverurl">
           <span>{{n.bookname}}</span>
           <p>{{n.bookstatename}}</p>
@@ -26,8 +26,10 @@ export default {
   methods:{
      gosearch(){
      this.$router.push("/booksearchword");
+     },
+     gobookInfo(id){
+       this.$router.push(`/bookinfo?id=${id}`)
      }
-     
   }
 }
 </script>

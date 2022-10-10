@@ -12,7 +12,12 @@
     <div class="loginContion">
       <p>
         <img src="../../assets/images/user.svg" alt="用户" />
-        <input type="text" class="usernameInp" placeholder="用户名(4~16个字符)" />
+        <input
+          type="text"
+          class="usernameInp"
+          placeholder="用户名(4~16个字符)"
+          v-model="username"
+        />
       </p>
       <p>
         <img src="../../assets/images/password.svg" alt="密码" />
@@ -21,6 +26,7 @@
           class="passwordInp"
           placeholder="密码(6~16个字符,包含英文、数字)"
           ref="psd"
+          v-model="psd"
         />
       </p>
       <p>
@@ -30,20 +36,31 @@
           class="passwordInp"
           placeholder="密码(6~16个字符,包含英文、数字)"
           ref="psd"
+          v-model="psd2"
         />
       </p>
       <p>
         <img src="../../assets/images/password.svg" alt="验证码" />
-        <input type="text" class="verificationCode" placeholder="验证码" />
+        <input
+          type="text"
+          class="verificationCode"
+          placeholder="验证码"
+          v-model="captchacode"
+        />
         <canvas id="captcha" class="captcha" ref="captcha"></canvas>
         <span @click="clickCap">换一张</span>
       </p>
 
       <p class="checkItem">
-        <input type="radio" class="checkbox" />
-        <span>我已经阅读并同意<span style="color:blue">"用户协议"</span>和<span style="color:blue">"隐私政策"</span></span>
+        <input type="radio" class="checkbox" :checked="checkStatus" @click="changeStatus"/>
+        <span
+          >我已经阅读并同意<span style="color: blue">"用户协议"</span>和<span
+            style="color: blue"
+            >"隐私政策"</span
+          ></span
+        >
       </p>
-      <button class="loginBtn">注册</button>
+      <button class="loginBtn" @click="verification">注册</button>
     </div>
   </div>
 </template>
@@ -53,11 +70,19 @@ import CaptchaMini from "captcha-mini";
 export default {
   data() {
     return {
+      checkStatus:false,
       showPsdStatus: false,
+      username: "",
+      psd: "",
+      psd2: "",
+      captchacode: "",
+      userReg: /^[a-zA-Z]{4,16}$/,
+      psdReg: /^(?=.*\d)(?=.*[a-zA-Z])[\da-zA-Z~!@#$%^&*]{6,16}$/,
+      userMsg: JSON.parse(localStorage.getItem("UserMsg")) ?? []
     };
   },
   mounted() {
-    this.initCaptcha()
+    this.initCaptcha();
   },
   methods: {
     comeback() {
@@ -89,8 +114,40 @@ export default {
         this.captcha = r; // 可通过 this.captcha 使用当前验证码（校验用户输入对否等）
       });
     },
-    clickCap(){
-      this.$refs.captcha.click()
+    clickCap() {
+      this.$refs.captcha.click();
+    },
+    changeStatus(){
+      this.checkStatus = !this.checkStatus
+    },
+    verification() {
+      if (!this.username.trim()) {
+        alert("铁血读书:请输入用户名(4~16个字符)");
+      } else if (!this.psd.trim() || !this.psd2.trim()) {
+        alert("铁血读书:请输入密码(6~16个字符)");
+      }else if (!this.psdReg.test(this.psd) || !this.psdReg.test(this.psd2)) {
+        alert("铁血读书:请输入正确密码(6~16个字符,包含英文、数字)")
+      }else if (this.psd2 != this.psd) {
+        alert("铁血读书:两次输入的密码不一致")
+      }else if (!this.captchacode.trim()) {
+        alert("铁血读书:请输入验证码")
+      }else if (this.captcha.toLowerCase() != this.captchacode.toLowerCase()) {
+        alert("铁血读书:请输入正确的验证码")
+      }else if (this.checkStatus == false) {
+        alert("铁血读书:请您同意用户协议和隐私政策")
+      }else {
+        for(let i = 0; i < this.userMsg.length;i++){
+          if (this.userMsg[i].userName == this.username) {
+            alert("热血读书:该用户已存在，请勿重复注册")
+            return
+          }
+        }
+        this.userMsg.push({
+          userName:this.username,
+          psd:this.psd
+        })
+        localStorage.setItem("UserMsg", JSON.stringify(this.userMsg))
+      }
     },
   },
 };
