@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="loginNav">
+    <div class="nav">
       <img src="../../assets/images/leftarrow.svg" alt="返回" @click="comeback" />
       <span>{{ title }}</span>
     </div>
@@ -38,7 +38,7 @@ export default {
         .get(`/htm/readlist_${type}_1.htm?pagesize=10&pageindex=1`)
         .then(({ data }) => {
           console.log(data);
-          this.bookArr = data
+          this.bookArr = data;
         });
     }
   }
@@ -46,23 +46,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.loginNav {
+.nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 50px;
-  border-top: 1px solid #d3d3d3;
   border-bottom: 1px solid #d3d3d3;
   text-align: center;
   line-height: 50px;
+  background-color: #fff;
+  z-index: 9;
+  align-items: center;
   img {
-    float: left;
-    width: 30px;
-    vertical-align: middle;
-    margin-top: 10px;
+    display: block;
   }
   span {
-    vertical-align: middle;
-    margin: auto;
-    margin-right: 15px;
+    flex: 1;
   }
 }
 </style>
