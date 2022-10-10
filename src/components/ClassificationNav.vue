@@ -1,10 +1,10 @@
 <template>
   <div class="classification-nav">
       <div class="book-over">
-        <span>完本</span>
+        <span @click="moreBook(22)">完本</span>
       </div>
     <div class="book-free">
-      <span>免费</span>
+      <span @click="moreBook(21)">免费</span>
     </div>
     <div class="book-rank">
       <span>排行</span>
@@ -21,6 +21,9 @@ export default {
   comments: {
   },
   methods: {
+    moreBook(num){
+      this.$router.push(`/more?type=${num}`)
+    }
   }
 };
 </script>

@@ -90,7 +90,7 @@ export default {
       });
     },
     moreBook(num){
-      this.$router.replace(`/more?type=${num}`)
+      this.$router.push(`/more?type=${num}`)
     }
   },
 
