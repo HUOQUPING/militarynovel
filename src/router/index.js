@@ -8,7 +8,7 @@ import LoginView from '../views/SettingView/LoginView.vue'
 import BookInfo from "../views/BookInfo.vue";
 import RegisterView from "../views/SettingView/RegisterView.vue"
 import MoreBook from "../views/BookcityView/MoreBook.vue"
-
+import ListClassify from "../views/BookcityView/ListClassify.vue"
 Vue.use(VueRouter)
 
 const routes = [
@@ -72,6 +72,14 @@ const routes = [
     path: '/more',
     name: 'more',
     component: MoreBook,
+    meta: {
+      navShow: false
+    },
+  },
+  {
+    path: '/listClassify',
+    name: 'listClassify',
+    component: ListClassify,
     meta: {
       navShow: false
     },
