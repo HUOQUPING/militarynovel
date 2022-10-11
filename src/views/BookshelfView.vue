@@ -2,7 +2,7 @@
   <div class="home">
     <div class="homeNav">
       <span>书架</span>
-      <img src="../assets/images/svg_search.png" alt="搜索" @click="gosearch" />
+      <img src="../assets/images/svg_search.png" alt="搜索" @click="goSearch" />
       <img src="../assets/images/svg_edit.png" alt="修改" />
     </div>
 
@@ -24,7 +24,7 @@ export default {
     } 
   },
   methods:{
-     gosearch(){
+     goSearch(){
      this.$router.push("/booksearchword");
      },
      gobookInfo(id){

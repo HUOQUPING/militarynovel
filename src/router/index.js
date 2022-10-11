@@ -6,76 +6,85 @@ import BookshelfView from '../views/BookshelfView.vue'
 import SettingView from '../views/SettingView/SettingView.vue'
 import LoginView from '../views/SettingView/LoginView.vue'
 import BookInfo from "../views/BookInfo.vue";
+import DirectoryInfo from "../views/DirectoryInfo.vue"
 import RegisterView from "../views/SettingView/RegisterView.vue"
 import MoreBook from "../views/BookcityView/MoreBook.vue"
 import ListClassify from "../views/BookcityView/ListClassify.vue"
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path:'/booksearchword',
-    name:'booksearchword',
-    component:BookcitySearch,
-    meta:{
-      navShow:false
-    }
-  },
-  {
-    path: '/bookshelf',
-    name: 'bookshelf',
-    component: BookshelfView,
-    meta: {
-      navShow: true, // true显示，false隐藏
+    {
+        path: '/booksearchword',
+        name: 'booksearchword',
+        component: BookcitySearch,
+        meta: {
+            navShow: false
+        }
     },
-  },
-  {
-    path: '/',
-    name: 'bookcity',
-    component: BookcityView,
-    meta: {
-      navShow: true
+    {
+        path: '/bookshelf',
+        name: 'bookshelf',
+        component: BookshelfView,
+        meta: {
+            navShow: true, // true显示，false隐藏
+        },
     },
-  },
-  {
-    path: '/setting',
-    name: 'setting',
-    component: SettingView,
-    meta: {
-      navShow: true
+    {
+        path: '/',
+        name: 'bookcity',
+        component: BookcityView,
+        meta: {
+            navShow: true
+        },
     },
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginView,
-    meta: {
-      navShow: false
+    {
+        path: '/setting',
+        name: 'setting',
+        component: SettingView,
+        meta: {
+            navShow: true
+        },
     },
-  },
-  {
-    path: '/bookinfo',
-    name: 'bookinfo',
-    component: BookInfo,
-    meta: {
-      navShow: false
+    {
+        path: '/login',
+        name: 'login',
+        component: LoginView,
+        meta: {
+            navShow: false
+        },
     },
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterView,
-    meta: {
-      navShow: false
+    {
+        path: '/bookinfo',
+        name: 'bookinfo',
+        component: BookInfo,
+        meta: {
+            navShow: false
+        }
     },
-  },
-  {
-    path: '/more',
-    name: 'more',
-    component: MoreBook,
-    meta: {
-      navShow: false
+    {
+        path: '/bookinfo/directory',
+        name: 'DirectoryInfo',
+        component: DirectoryInfo,
+        meta: {
+            navShow: false
+        },
     },
-  },
+    {
+        path: '/register',
+        name: 'register',
+        component: RegisterView,
+        meta: {
+            navShow: false
+        },
+    },
+    {
+        path: '/more',
+        name: 'more',
+        component: MoreBook,
+        meta: {
+            navShow: false
+        },
+    },
   {
     path: '/listClassify',
     name: 'listClassify',
@@ -87,9 +96,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'hash',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'hash',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router

@@ -1,3 +1,4 @@
+<script src="../router/index.js"></script>
 <template>
   <div class="book-info" v-if="flag == true">
     <div v-if="bookinfo[0].ret == 0">
@@ -29,7 +30,7 @@
       </div>
       <!-- 目录及最新章节 -->
       <div class="catalogues">
-        <div class="catalogues-box">
+        <div class="catalogues-box" @click="directory(bookinfo[0].bookid,bookinfo[0].bookname)">
           <p class="catalogue-p">
             目录
             <span>&gt;</span>
@@ -151,6 +152,9 @@ export default {
         });
         localStorage.setItem("bookArr", JSON.stringify(this.obj));
       }
+    },
+    directory(id,bookname){
+      this.$router.push(`/bookinfo/directory?id=${id}&bookname=${bookname}`)
     },
     isScroll() {
       const top = document.documentElement.scrollTop;
