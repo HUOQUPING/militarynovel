@@ -4,7 +4,7 @@
       <ul>
         <router-link
           tag="li"
-          v-for="(t,index) in bookArr.book_infos"
+          v-for="(t,index) in bookArr"
           :key="t.bookid"
           :data-id="t.bookid"
           v-show="index<=3"

@@ -2,7 +2,7 @@
   <div class="carousel" >
     <transition-group class="container" tag="ul" ref="ul" >
       <li
-        v-for="(t,i) in imgArr[9].book_infos.concat(imgArr[9].book_infos[0])"
+        v-for="(t,i) in imgArr.concat(imgArr[0])"
         :key="i"
       >
         <img :src="t.coverurl" />
@@ -30,7 +30,7 @@ export default {
         this.$refs.ul.$el.style.transition = "left .5s linear";
         if (
           this.index ==
-          this.imgArr[9].book_infos.concat(this.imgArr[9].book_infos[0]).length - 1
+          this.imgArr.concat(this.imgArr[0]).length - 1
         ) {
           this.index = 0
           this.$refs.ul.$el.ontransitionend = function () {
