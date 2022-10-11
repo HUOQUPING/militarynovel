@@ -1,11 +1,10 @@
 <template>
   <div class="setting">
     <div class="settingNav">设置</div>
-    <router-view></router-view>
-    <router-link tag="div" class="loginUser" to="/login">
+    <div class="loginUser" @click="goLogin">
       <img src="../../assets/images/personal_icon.png" alt="用户图片" />
-      <span>点击登录</span>
-    </router-link>
+      <span>{{userName}}</span>
+    </div>
 
     <div class="expenseItem">
       <div class="record">
@@ -29,9 +28,55 @@
       <div>赏个好评<span>&gt;</span></div>
       <div>清除缓存<span>&gt;</span></div>
       <div>关于<span>&gt;</span></div>
+      <div @click="exitUser">退出账号<span>&gt;</span></div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data(){
+    return {
+      userMsg:JSON.parse(localStorage.getItem("UserMsg")) ?? [],
+      userName:null ?? "点击登录",
+    }
+  },
+  mounted(){
+    this.checkLogin()
+  },
+  methods:{
+    goLogin(){
+      if (this.userName == "点击登录") {
+        this.$router.push("/login")
+      }
+      
+    },
+    checkLogin(){
+      for(let i = 0; i < this.userMsg.length; i++){
+        if (this.userMsg[i].loginStatus == true) {
+          this.userName = this.userMsg[i].userName
+          return
+        }
+      }
+    },
+    exitUser(){
+     let r = confirm("热血读书:是否退出账号")
+     if (r == true) {
+       for(let i = 0; i < this.userMsg.length;i++){
+         if (this.userName == this.userMsg[i].userName) {
+           this.userMsg[i].loginStatus = false
+          localStorage.setItem("UserMsg", JSON.stringify(this.userMsg))
+          this.userName = null ?? "点击登录"
+         }
+       }
+       alert("热血读书:退出成功")
+     }else if (r == false) {
+       return
+     }
+    },
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .setting {
@@ -101,7 +146,7 @@
   .settingItem {
     margin-top: 20px;
     width: 100%;
-    height: 230px;
+    height: 275px;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -122,7 +167,7 @@
       }
     }
 
-    & > div:nth-child(5) {
+    & > div:nth-child(6) {
       border-bottom: 0px;
     }
   }

@@ -144,9 +144,13 @@ export default {
         }
         this.userMsg.push({
           userName:this.username,
-          psd:this.psd
+          psd:this.psd,
+          loginStatus:false,
+          isVip:false
         })
         localStorage.setItem("UserMsg", JSON.stringify(this.userMsg))
+        alert("注册成功")
+        this.$router.push("/login")
       }
     },
   },

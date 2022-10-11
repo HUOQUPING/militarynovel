@@ -15,7 +15,7 @@
       </p>
       <p>
         <img src="../../assets/images/user.svg" alt="用户" />
-        <input type="text" class="usernameInp" placeholder="输入正确用户名" />
+        <input type="text" class="usernameInp" placeholder="输入正确用户名" v-model="usernamecode"/>
       </p>
       <p>
         <img src="../../assets/images/password.svg" alt="密码" />
@@ -24,11 +24,12 @@
           class="passwordInp"
           placeholder="输入正确密码"
           ref="psd"
+          v-model="passwordcode"
         />
       </p>
       <p>
         <img src="../../assets/images/password.svg" alt="验证码" />
-        <input type="text" class="verificationCode" placeholder="验证码" />
+        <input type="text" class="verificationCode" placeholder="验证码" v-model="captchacode"/>
         <canvas id="captcha" class="captcha" ref="captcha"></canvas>
         <span @click="clickCap">换一张</span>
       </p>
@@ -37,7 +38,7 @@
         <input type="checkbox" class="checkbox" @click="showPsd" />
         <span>显示密码</span>
       </p>
-      <button class="loginBtn">登录</button>
+      <button class="loginBtn" @click="userlogin">登录</button>
     </div>
   </div>
 </template>
@@ -48,6 +49,10 @@ export default {
   data() {
     return {
       showPsdStatus: false,
+      usernamecode:"",
+      passwordcode:"",
+      captchacode:"",
+      userMsg:JSON.parse(localStorage.getItem("UserMsg")) ?? [],
     };
   },
   mounted() {
@@ -88,6 +93,31 @@ export default {
     },
     clickCap(){
       this.$refs.captcha.click()
+    },
+    userlogin(){
+      if (!this.usernamecode.trim()) {
+        alert("热血读书:请输入用户名")
+      }else if (!this.passwordcode.trim()) {
+        alert("热血读书:请输入密码")
+      }else if (!this.captchacode.trim()) {
+        alert("热血读书:请输入验证码")
+      }else if (this.captchacode.toLowerCase() != this.captcha.toLowerCase()) {
+        alert("热血读书:请输入正确的验证码")
+      }else {
+        for(let i = 0; i < this.userMsg.length; i++){
+          if (this.usernamecode == this.userMsg[i].userName && this.passwordcode == this.userMsg[i].psd) {
+            alert("成功")
+            this.userMsg[i].loginStatus = true
+            localStorage.setItem("UserMsg", JSON.stringify(this.userMsg))
+            this.$router.push("/setting")
+            return
+          }else{
+            alert("热血读书:请输入正确的用户名和密码")
+            return
+          }
+        }
+        alert("热血读书:该用户名未注册")
+      }
     },
   },
 };
