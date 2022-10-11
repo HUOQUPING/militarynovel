@@ -214,6 +214,7 @@ export default {
 
   .searchBook {
     width: 100%;
+    margin-top: 50px;
   }
 }
 </style>
