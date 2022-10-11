@@ -62,6 +62,7 @@ export default {
     MoorBook
   },
   mounted() {
+    console.log(this.wordsArr);
     this.getData();
   },
   methods: {
@@ -103,7 +104,7 @@ export default {
           `/book/ReadSearch.aspx?ver=260&pagesize=10&pageindex=1&from=1&keyword=${word}`
         )
         .then(({ data }) => {
-          this.searchBookArr = data
+          this.searchBookArr = data.bookinfos
           console.log(data.bookinfos);
         });
     },

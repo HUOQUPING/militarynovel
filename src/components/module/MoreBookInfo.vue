@@ -4,7 +4,7 @@
     <ul>
       <router-link tag="li"  v-for="(t,i) in bookArr" :key="i" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid">
       <!-- <li v-for="t in bookArr.book_infos" :key="t.bookid" :data-id="t.bookid" :to="'/bookinfo?id='+t.bookid"> -->
-        <img :src="t.coverurl" />
+        <img :src="t.coverurl" :onerror="defaults"/>
         <div class="text">
           <h3>{{t.bookname}}</h3>
           <p>{{t.summary}}</p>
@@ -20,9 +20,13 @@
 export default {
   data() {
     return {
+      defaults:'this.src="' + require('../../assets/images/nocover.jpg')+'"'
     };
   },
   props: ["bookArr"],
+  created(){
+    console.log(this.b);
+  },
 };
 </script>
 

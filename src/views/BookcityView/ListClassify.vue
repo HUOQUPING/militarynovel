@@ -21,7 +21,7 @@
       <div class="li-cl-ma-ri">
         <router-link tag="li" v-for="(w, i) in mainArr" :key="i" :to="'/bookinfo?id='+w.bookid">
           <div class="ri-img">
-            <img :src="w.coverurl" alt="" />
+           <img :src="t.coverurl" :onerror="defaults"/>
           </div>
           <div class="ri-txt">
             <p>{{ w.bookname }}</p>
@@ -49,6 +49,7 @@ export default {
       text: [],
       mainArr: [],
       activeVar:this.$route.query.type,
+      defaults:'this.src="' + require('../../assets/images/nocover.jpg')+'"'
     };
   },
   mounted() {
@@ -136,11 +137,6 @@ export default {
       margin: 10px;
       display: flex;
 
-      & img {
-        width: 70px;
-        height: 90px;
-        border-radius: 5px;
-      }
       & .ri-txt {
         width: 220px;
         margin-left: 8px;
@@ -171,4 +167,5 @@ export default {
     }
   }
 }
+
 </style>

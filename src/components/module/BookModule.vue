@@ -10,7 +10,7 @@
           v-show="index<=3"
           :to="'/bookinfo?id='+t.bookid"
         >
-          <img :src="t.coverurl" />
+          <img :src="t.coverurl" :onerror="defaults"/>
           <p>{{t.bookname}}</p>
           <span>{{t.penname}}</span>
         </router-link>
@@ -19,10 +19,11 @@
 </template>
 
 <script>
+// import { Image as VanImage } from 'vant';
 export default {
   data() {
     return {
-      
+      defaults:'this.src="' + require('../../assets/images/nocover.jpg')+'"'
     };
   },
   props: ["bookArr"],

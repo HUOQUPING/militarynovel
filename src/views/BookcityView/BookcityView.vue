@@ -62,6 +62,7 @@ import ClassificationNav from "@/components/ClassificationNav.vue";
 import bookModule from "@/components/module/BookModule.vue";
 import StripModule from "@/components/module/StripModule.vue";
 
+
 export default {
   name: "HomeView",
   data() {

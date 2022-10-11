@@ -5,7 +5,9 @@ import VueAxiosPlugin from 'vue-axios-plugin'
 import { Toast } from 'vant';
 import { Icon } from 'vant';
 import { List } from 'vant';
+import { Image as VanImage } from 'vant';
 
+Vue.use(VanImage);
 Vue.use(List);
 Vue.use(Icon);
 Vue.use(Toast);
