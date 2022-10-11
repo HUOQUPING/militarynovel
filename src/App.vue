@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <nav  v-show="$route.meta.navShow">
+    <nav v-show="$route.meta.navShow">
       <router-link tag="div" class="nav-item icon-bookshelf" to="/bookshelf">
         <span>书架</span>
       </router-link>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  created(){
+  created() {
     console.log(this.$router);
   }
 }
@@ -35,6 +35,7 @@ nav {
   line-height: 80px;
   box-shadow: 0px 2px 5px black;
   background-color: white;
+
   .nav-item {
     flex: 1;
     background-size: 30px 30px;
@@ -42,23 +43,30 @@ nav {
     background-repeat: no-repeat;
     color: #555;
     font-size: 12px;
+
     &.icon-bookshelf {
       background-image: url(../src/assets/images/tabbar/tab_bookshelf.png);
     }
+
     &.icon-bookcity {
       background-image: url(../src/assets/images/tabbar/tab_bookstore.png);
     }
+
     &.icon-setting {
       background-image: url(../src/assets/images/tabbar/tab_setting.png);
     }
+
     &.router-link-exact-active {
       color: rgba(255, 140, 0, 0.84);
+
       &.icon-bookshelf {
         background-image: url(../src/assets/images/tabbar/tab_bookshelf_pressed.png);
       }
+
       &.icon-bookcity {
         background-image: url(../src/assets/images/tabbar/tab_bookstore_pressed.png);
       }
+
       &.icon-setting {
         background-image: url(../src/assets/images/tabbar/tab_setting_pressed.png);
       }
