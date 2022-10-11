@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 export default {
   data() {
     return {
@@ -69,12 +70,12 @@ export default {
               this.userName = null ?? "点击登录";
             }
           }
-          alert("热血读书:退出成功");
+           Toast("热血读书:退出成功");
         } else if (r == false) {
           return;
         }
       }else {
-        alert("热血读书:当前为登录账号")
+         Toast("热血读书:当前未登录账号")
       }
     },
   },

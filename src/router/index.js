@@ -10,6 +10,7 @@ import DirectoryInfo from "../views/DirectoryInfo.vue"
 import RegisterView from "../views/SettingView/RegisterView.vue"
 import MoreBook from "../views/BookcityView/MoreBook.vue"
 import ListClassify from "../views/BookcityView/ListClassify.vue"
+import LookFiction from "../views/LookFiction.vue"
 Vue.use(VueRouter)
 
 const routes = [
@@ -89,6 +90,14 @@ const routes = [
     path: '/listClassify',
     name: 'listClassify',
     component: ListClassify,
+    meta: {
+      navShow: false
+    },
+  },
+  {
+    path: '/lookfiction',
+    name: 'lookfiction',
+    component: LookFiction,
     meta: {
       navShow: false
     },

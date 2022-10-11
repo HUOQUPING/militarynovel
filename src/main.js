@@ -2,8 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueAxiosPlugin from 'vue-axios-plugin'
+import { Toast } from 'vant';
+import { Icon } from 'vant';
+import { List } from 'vant';
 
-
+Vue.use(List);
+Vue.use(Icon);
+Vue.use(Toast);
 Vue.use(VueAxiosPlugin, {
   // 请求拦截处理
   reqHandleFunc: config => config,

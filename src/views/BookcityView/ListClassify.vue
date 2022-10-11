@@ -10,8 +10,8 @@
           <li
             v-for="(txt, i) in text[1]"
             :key="i"
-            :class="{ activeCss: activeVar == i }"
-            @click="highLight(txt, i)"
+            :class="{ activeCss: activeVar == i}"
+            @click="highLight(i)"
             
           >
             {{ txt }}
@@ -70,7 +70,7 @@ export default {
       this.$router.back();
     },
 
-    highLight(txt, i) {
+    highLight(i) {
       this.activeVar = i;
       this.getData(i);
     },

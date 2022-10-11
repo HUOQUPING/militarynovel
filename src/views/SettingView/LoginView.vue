@@ -45,6 +45,7 @@
 
 <script>
 import CaptchaMini from "captcha-mini";
+import { Toast } from 'vant';
 export default {
   data() {
     return {
@@ -96,29 +97,29 @@ export default {
     },
     userlogin(){
       if (!this.usernamecode.trim()) {
-        alert("热血读书:请输入用户名")
+        Toast("请输入用户名")
       }else if (!this.passwordcode.trim()) {
-        alert("热血读书:请输入密码")
+        Toast("请输入密码")
       }else if (!this.captchacode.trim()) {
-        alert("热血读书:请输入验证码")
+        Toast("请输入验证码")
       }else if (this.captchacode.toLowerCase() != this.captcha.toLowerCase()) {
-        alert("热血读书:请输入正确的验证码")
+        Toast("请输入正确的验证码")
       }else {
        
         for(let i = 1; i <= this.userMsg.length; i++){
           if (this.usernamecode == this.userMsg[i].userName && this.passwordcode == this.userMsg[i].psd) {
-            alert("成功")
+            Toast("成功")
             this.userMsg[i].loginStatus = true
             localStorage.setItem("UserMsg", JSON.stringify(this.userMsg))
             this.$router.push("/setting")
             return
           }else{
             console.log(this.usernamecode,this.passwordcode);
-            alert("热血读书:请输入正确的用户名和密码")
+            Toast("请输入正确的用户名和密码")
             return
           }
         }
-        alert("热血读书:该用户名未注册")
+        Toast("该用户名未注册")
       }
     },
   },

@@ -76,7 +76,7 @@
         >
           加入书架
         </div>
-        <div class="readding">开始阅读</div>
+        <div class="readding" @click="goLookFiction(bookinfo[0].bookid)">开始阅读</div>
         <div>购买章节</div>
       </div>
     </div>
@@ -92,6 +92,7 @@
 <script>
 import RecommendedModule from "@/components/module/RecommendedModule.vue";
 import CommentModule from "@/components/module/CommentModule.vue";
+import { Toast } from 'vant';
 export default {
   data() {
     return {
@@ -132,7 +133,7 @@ export default {
       if (bookArr) {
         for(let i = 0; i < bookArr.length; i++){
           if(bookArr[i].bookid == bookid){
-            alert('存在')
+            Toast('图书已加入书架')
             return
           }
         }
@@ -143,6 +144,7 @@ export default {
           bookstatename: bookstatename,
         })
         localStorage.setItem("bookArr", JSON.stringify(bookArr));
+        Toast("已加入书架")
       } else {
         this.obj.push({
           bookid: bookid,
@@ -151,6 +153,7 @@ export default {
           bookstatename: bookstatename,
         });
         localStorage.setItem("bookArr", JSON.stringify(this.obj));
+         Toast("已加入书架")
       }
     },
     directory(id,bookname){
@@ -165,6 +168,9 @@ export default {
         this.isShow = false;
       }
     },
+    goLookFiction(id){
+      this.$router.push(`/lookfiction?id=${id}`)
+    }
   },
   mounted() {
     window.addEventListener("scroll", this.isScroll);

@@ -1,12 +1,24 @@
 <template>
   <div>
     <div class="nav">
-      <img src="../../assets/images/back_black.png" alt="返回" @click="comeback" />
+      <img
+        src="../../assets/images/back_black.png"
+        alt="返回"
+        @click="comeback"
+      />
       <span>{{ title }}</span>
     </div>
     <div>
-      <p v-for="t in bookArr" :key="t.bookid">{{t.bookname}}</p>
-      <MoreBookInfo :bookArr="bookArr"></MoreBookInfo>
+      <p v-for="t in bookArr" :key="t.bookid">{{ t.bookname }}</p>
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
+        <MoreBookInfo :bookArr="bookArr"></MoreBookInfo>
+      </van-list>
+      
     </div>
   </div>
 </template>
@@ -14,16 +26,20 @@
 <script>
 import { typetool } from "@/utils/bookType";
 import MoreBookInfo from "@/components/module/MoreBookInfo.vue";
+// import { List } from 'vant';
 
 export default {
   data() {
     return {
       title: null,
-      bookArr: []
+      bookArr: [],
+      loading: false,
+      finished: false,
+      pageindex:1,
     };
   },
   components: {
-    MoreBookInfo
+    MoreBookInfo,
   },
   created() {
     this.getData(this.$route.query.type);
@@ -35,14 +51,23 @@ export default {
     },
     getData(type) {
       this.$axios
-        .get(`/htm/readlist_${type}_1.htm?pagesize=10&pageindex=1`)
+        .get(`/htm/readlist_${type}_1.htm?pagesize=10&pageindex=${this.pageindex}`)
         .then(({ data }) => {
           console.log(data);
           this.bookArr = data;
+          console.log(this.bookArr);
         });
     },
-    
-  }
+    onLoad() {
+    //  this.pageindex += 1
+    //  console.log(this.pageindex);
+    //  this.getData(this.$route.query.type)
+    //   this.loading = false
+    //   if (this.bookArr.length >= 20) {
+    //     this.finished = true
+    //   }
+    },
+  },
 };
 </script>
 

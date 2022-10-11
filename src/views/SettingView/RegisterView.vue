@@ -67,6 +67,7 @@
 
 <script>
 import CaptchaMini from "captcha-mini";
+import { Toast } from 'vant';
 export default {
   data() {
     return {
@@ -122,25 +123,25 @@ export default {
     },
     verification() {
       if (!this.username.trim()) {
-        alert("铁血读书:请输入用户名(4~16个字符)");
+        Toast("请输入用户名(4~16个字符)");
       }else if(!this.userReg.test(this.username)){
-        alert("热血读书:请输入正确的用户名(4~16个字符)")
+        Toast("请输入正确的用户名(4~16个字符)")
       }else if (!this.psd.trim() || !this.psd2.trim()) {
-        alert("铁血读书:请输入密码(6~16个字符)");
+        Toast("请输入密码(6~16个字符)");
       }else if (!this.psdReg.test(this.psd) || !this.psdReg.test(this.psd2)) {
-        alert("铁血读书:请输入正确密码(6~16个字符,包含英文、数字)")
+        Toast("请输入正确密码(6~16个字符,包含英文、数字)")
       }else if (this.psd2 != this.psd) {
-        alert("铁血读书:两次输入的密码不一致")
+        Toast("两次输入的密码不一致")
       }else if (!this.captchacode.trim()) {
-        alert("铁血读书:请输入验证码")
+        Toast("请输入验证码")
       }else if (this.captcha.toLowerCase() != this.captchacode.toLowerCase()) {
-        alert("铁血读书:请输入正确的验证码")
+        Toast("请输入正确的验证码")
       }else if (this.checkStatus == false) {
-        alert("铁血读书:请您同意用户协议和隐私政策")
+        Toast("请您同意用户协议和隐私政策")
       }else {
         for(let i = 0; i < this.userMsg.length;i++){
           if (this.userMsg[i].userName == this.username) {
-            alert("热血读书:该用户已存在，请勿重复注册")
+            Toast("该用户已存在，请勿重复注册")
             return
           }
         }
@@ -151,7 +152,7 @@ export default {
           isVip:false
         })
         localStorage.setItem("UserMsg", JSON.stringify(this.userMsg))
-        alert("注册成功")
+        Toast("注册成功")
         this.$router.push("/login")
       }
     },
