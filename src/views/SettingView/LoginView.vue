@@ -104,7 +104,8 @@ export default {
       }else if (this.captchacode.toLowerCase() != this.captcha.toLowerCase()) {
         alert("热血读书:请输入正确的验证码")
       }else {
-        for(let i = 0; i < this.userMsg.length; i++){
+       
+        for(let i = 1; i <= this.userMsg.length; i++){
           if (this.usernamecode == this.userMsg[i].userName && this.passwordcode == this.userMsg[i].psd) {
             alert("成功")
             this.userMsg[i].loginStatus = true
@@ -112,6 +113,7 @@ export default {
             this.$router.push("/setting")
             return
           }else{
+            console.log(this.usernamecode,this.passwordcode);
             alert("热血读书:请输入正确的用户名和密码")
             return
           }

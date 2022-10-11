@@ -76,7 +76,7 @@ export default {
       psd: "",
       psd2: "",
       captchacode: "",
-      userReg: /^[a-zA-Z]{4,16}$/,
+      userReg:  /^[A-Za-z0-9_\-\u4e00-\u9fa5]{4,16}$/,
       psdReg: /^(?=.*\d)(?=.*[a-zA-Z])[\da-zA-Z~!@#$%^&*]{6,16}$/,
       userMsg: JSON.parse(localStorage.getItem("UserMsg")) ?? []
     };

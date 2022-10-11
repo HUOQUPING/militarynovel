@@ -1,5 +1,5 @@
 <template>
-  <div class="recommended">
+  <div class="recommended"> 
     <ul>
       <li v-for="t in recommendList" :key="t.bookid">
         <img :src="t.coverurl" />
@@ -17,9 +17,9 @@ export default {
   watch: {
     recommendList(newV) {
       console.log(newV);
-    }
+    },
   },
-  props: ["recommendList"]
+  props: ["recommendList"],
 };
 </script>
 
