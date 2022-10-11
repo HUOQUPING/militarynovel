@@ -6,10 +6,10 @@
     <div class="book-free"  @click="moreBook(21)">
       <span>免费</span>
     </div>
-    <div class="book-rank">
+    <div class="book-rank" @click="goList(30)">
       <span>排行</span>
     </div>
-    <div class="book-sort">
+    <div class="book-sort" @click="goClass(40)">
       <span>分类</span>
     </div>
   <router-view></router-view>
@@ -24,6 +24,12 @@ export default {
     moreBook(num){
       this.$router.push(`/more?type=${num}`)
     },
+    goList(num){
+      this.$router.push(`/listClassify?type=${num}`)
+    },
+    goClass(num){
+      this.$router.push(`/listClassify?type=${num}`)
+    }
   }
 };
 </script>
