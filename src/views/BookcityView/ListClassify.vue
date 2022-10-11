@@ -48,7 +48,7 @@ export default {
     return {
       text: [],
       mainArr: [],
-      activeVar: 0,
+      activeVar:this.$route.query.type,
     };
   },
   mounted() {

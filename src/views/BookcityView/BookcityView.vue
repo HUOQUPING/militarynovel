@@ -4,7 +4,7 @@
       <!-- 搜索框 -->
       <BookcitySearch class="bookcity-search"></BookcitySearch>
       <!-- 轮播图 -->
-      <CarouselChart  class="carousel-chart" :imgArr="bookArr" v-if="flag == true"></CarouselChart>
+      <CarouselChart  class="carousel-chart" :imgArr="bookArr[9]" v-if="flag == true"></CarouselChart>
       <!-- 分类 -->
       <ClassificationNav class="classification-nav"></ClassificationNav>
     </div>
@@ -84,7 +84,8 @@ export default {
     getData() {
       this.$axios.get('/htm/defaultnew.htm?ver=260&from=1').then(({ data }) => {
         data.homeparts.forEach(el => {
-          this.bookArr.push(el);
+          console.log(el.book_infos);
+          this.bookArr.push(el.book_infos);
         });
         this.flag = true
       });

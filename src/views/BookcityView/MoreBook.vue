@@ -9,7 +9,6 @@
       <span>{{ title }}</span>
     </div>
     <div>
-      <p v-for="t in bookArr" :key="t.bookid">{{ t.bookname }}</p>
       <van-list
         v-model="loading"
         :finished="finished"
@@ -54,7 +53,7 @@ export default {
         .get(`/htm/readlist_${type}_1.htm?pagesize=10&pageindex=${this.pageindex}`)
         .then(({ data }) => {
           console.log(data);
-          this.bookArr = data;
+          this.bookArr = data.bookinfos;
           console.log(this.bookArr);
         });
     },
