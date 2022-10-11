@@ -123,7 +123,9 @@ export default {
     verification() {
       if (!this.username.trim()) {
         alert("铁血读书:请输入用户名(4~16个字符)");
-      } else if (!this.psd.trim() || !this.psd2.trim()) {
+      }else if(!this.userReg.test(this.username)){
+        alert("热血读书:请输入正确的用户名(4~16个字符)")
+      }else if (!this.psd.trim() || !this.psd2.trim()) {
         alert("铁血读书:请输入密码(6~16个字符)");
       }else if (!this.psdReg.test(this.psd) || !this.psdReg.test(this.psd2)) {
         alert("铁血读书:请输入正确密码(6~16个字符,包含英文、数字)")
