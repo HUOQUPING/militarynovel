@@ -3,7 +3,7 @@
     <div class="settingNav">设置</div>
     <div class="loginUser" @click="goLogin">
       <img src="../../assets/images/personal_icon.png" alt="用户图片" />
-      <span>{{userName}}</span>
+      <span>{{ userName }}</span>
     </div>
 
     <div class="expenseItem">
@@ -35,47 +35,50 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      userMsg:JSON.parse(localStorage.getItem("UserMsg")) ?? [],
-      userName:null ?? "点击登录",
-    }
+      userMsg: JSON.parse(localStorage.getItem("UserMsg")) ?? [],
+      userName: null ?? "点击登录",
+    };
   },
-  mounted(){
-    this.checkLogin()
+  mounted() {
+    this.checkLogin();
   },
-  methods:{
-    goLogin(){
+  methods: {
+    goLogin() {
       if (this.userName == "点击登录") {
-        this.$router.push("/login")
+        this.$router.push("/login");
       }
-      
     },
-    checkLogin(){
-      for(let i = 0; i < this.userMsg.length; i++){
+    checkLogin() {
+      for (let i = 0; i < this.userMsg.length; i++) {
         if (this.userMsg[i].loginStatus == true) {
-          this.userName = this.userMsg[i].userName
-          return
+          this.userName = this.userMsg[i].userName;
+          return;
         }
       }
     },
-    exitUser(){
-     let r = confirm("热血读书:是否退出账号")
-     if (r == true) {
-       for(let i = 0; i < this.userMsg.length;i++){
-         if (this.userName == this.userMsg[i].userName) {
-           this.userMsg[i].loginStatus = false
-          localStorage.setItem("UserMsg", JSON.stringify(this.userMsg))
-          this.userName = null ?? "点击登录"
-         }
-       }
-       alert("热血读书:退出成功")
-     }else if (r == false) {
-       return
-     }
+    exitUser() {
+      if (this.userName != "点击登录") {
+        let r = confirm("热血读书:是否退出账号");
+        if (r == true) {
+          for (let i = 0; i < this.userMsg.length; i++) {
+            if (this.userName == this.userMsg[i].userName) {
+              this.userMsg[i].loginStatus = false;
+              localStorage.setItem("UserMsg", JSON.stringify(this.userMsg));
+              this.userName = null ?? "点击登录";
+            }
+          }
+          alert("热血读书:退出成功");
+        } else if (r == false) {
+          return;
+        }
+      }else {
+        alert("热血读书:当前为登录账号")
+      }
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -172,5 +175,4 @@ export default {
     }
   }
 }
-
 </style>
