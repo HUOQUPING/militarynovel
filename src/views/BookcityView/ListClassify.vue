@@ -21,7 +21,7 @@
       <div class="li-cl-ma-ri">
         <router-link tag="li" v-for="(w, i) in mainArr" :key="i" :to="'/bookinfo?id='+w.bookid">
           <div class="ri-img">
-           <img :src="t.coverurl" :onerror="defaults"/>
+           <img :src="w.coverurl" :onerror="defaults"/>
           </div>
           <div class="ri-txt">
             <p>{{ w.bookname }}</p>
@@ -136,6 +136,12 @@ export default {
       width: 100%;
       margin: 10px;
       display: flex;
+
+      & img {
+        width: 70px;
+        height: 90px;
+        border-radius: 5px;
+      }
 
       & .ri-txt {
         width: 220px;

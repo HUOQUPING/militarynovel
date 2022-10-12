@@ -6,7 +6,10 @@ import { Toast } from 'vant';
 import { Icon } from 'vant';
 import { List } from 'vant';
 import { Image as VanImage } from 'vant';
+import { Dialog } from 'vant';
 
+
+Vue.use(Dialog);
 Vue.use(VanImage);
 Vue.use(List);
 Vue.use(Icon);

@@ -35,6 +35,7 @@
 
 <script>
 import { Toast } from 'vant';
+import { Dialog } from 'vant';
 export default {
   data() {
     return {
@@ -61,8 +62,10 @@ export default {
     },
     exitUser() {
       if (this.userName != "点击登录") {
-        let r = confirm("热血读书:是否退出账号");
-        if (r == true) {
+        Dialog.confirm({
+          message:"热血读书:是否退出账号"
+        })
+        .then(()=>{
           for (let i = 0; i < this.userMsg.length; i++) {
             if (this.userName == this.userMsg[i].userName) {
               this.userMsg[i].loginStatus = false;
@@ -71,9 +74,10 @@ export default {
             }
           }
            Toast("热血读书:退出成功");
-        } else if (r == false) {
+        })
+        .catch(()=>{
           return;
-        }
+        })
       }else {
          Toast("热血读书:当前未登录账号")
       }

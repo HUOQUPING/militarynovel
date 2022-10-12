@@ -12,7 +12,7 @@
       <van-list
           v-model="loading"
           :finished="finished"
-          :immediate-check=false
+          :immediate-check="false"
           finished-text="没有更多了"
           @load="onLoad"
       >
@@ -73,16 +73,6 @@ export default {
         this.loading = false;
 
         // 停止加载数据
-/*
-
-        let finalArr = (self.bookArr.length - 1) - (self.pagesize - 1)
-        console.log(finalArr)
-        console.log(`self.bookArr[(self.bookArr.length - 1) - (self.pagesize - 1)].bookid >>>`, finalArr, self.bookArr[(self.bookArr.length - 1) - (self.pagesize - 1)].bookid)
-        console.log(`self.bookArr[0].bookid >>>`, self.bookArr[0].bookid)
-        console.log(self.bookArr.length)
-
-*/
-
 
         if (self.bookArr[(self.bookArr.length - 1) - (self.pagesize - 1)].bookid == self.bookArr[0].bookid || self.bookArr.length < self.pagesize) {
           this.finished = true;
