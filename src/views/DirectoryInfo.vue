@@ -38,6 +38,7 @@ export default {
       this.$axios.get(`/book/ReadCatalog.aspx?ver=260&from=1&bookid=${id}`).then(({data}) => {
         // this.$axios.get(`/json/bookid32257.json`).then(({data}) => {
         console.log(id, data.ret, data.volumes.length)
+        console.log(data)
         this.bookData = data
       })
     },

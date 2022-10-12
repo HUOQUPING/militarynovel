@@ -84,8 +84,8 @@ export default {
   methods: {
     getData() {
       this.$axios.get('/htm/defaultnew.htm?ver=260&from=1').then(({ data }) => {
+        console.log(data)
         data.homeparts.forEach(el => {
-          console.log(el.book_infos);
           this.bookArr.push(el.book_infos);
         });
         this.flag = true
