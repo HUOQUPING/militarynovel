@@ -1,16 +1,16 @@
 <template>
   <div class="LookFicCont">
-    <div v-for="(n,i) in chapterList" :key="n.id">
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad(i)"
-      >
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+      <div v-for="(n,i) in bookArr" :key="i">
         <span class="zhangjieName">{{ n.chapterName }}</span>
-        <div class="a"></div>
-      </van-list>
-    </div>
+          <div v-html="arr" class="bookcontion"></div>
+      </div>
+    </van-list>
   </div>
 </template>
 
@@ -22,6 +22,8 @@ export default {
       chapterList: [],
       loading: false,
       finished: false,
+      bookArr:[],
+      index:-1,
     };
   },
   mounted() {
@@ -32,7 +34,6 @@ export default {
       this.$axios
         .get(
           `/book/ReadCatalog.aspx?ver=260&from=1&bookid=${this.$route.query.id}`
-          // "./json/bookid33824.json"
         )
         .then(({ data }) => {
           for (let i = 0; i < data.volumes.length; i++) {
@@ -40,30 +41,29 @@ export default {
               this.chapterList.push(data.volumes[i].chapterList[j]);
             }
           }
-          console.log(this.chapterList);
         });
     },
 
-    // getBookContent(id) {
-    //   this.$axios
-    //     .get(`/book/ReadContent.aspx?ver=260&from=2&chapterids=${id}`)
-    //     .then(({ data }) => {
-    //       let replaceRegex = /(\r\n)|(\n)/g;
-    //       this.arr += data.content_list[0].content.replace(
-    //         replaceRegex,
-    //         "<p/>"
-    //       );
-    //       this.finished = true;
-    //       console.log(data);
-    //     });
-    // },
-    onLoad(i) {
-      // let self = this;
+    getBookContent(id) {
+      this.$axios
+        .get(`/book/ReadContent.aspx?ver=260&from=2&chapterids=${id}`)
+        .then(({ data }) => {
+          let replaceRegex = /(\r\n)|(\n)/g;
+          this.arr = data.content_list[0].content.replace(
+            replaceRegex,
+            "<p/>"
+          );
+        });
+    },
+    onLoad() {
       setTimeout(() => {
-        if (i++) {
-          this.loading = false;
+        this.index++
+        this.bookArr.push(this.chapterList[this.index])
+        this.getBookContent(this.bookArr[this.index].id)
+        this.loading = false
+        if (this.bookArr.length == this.chapterList.length) {
+          this.finished = true
         }
-        
       }, 2000);
     },
   },
@@ -76,13 +76,14 @@ export default {
   .zhangjieName {
     font-size: 12px;
     margin-left: 10px;
-    // .bookcontion {
-    //   font-size: 16px;
-    //   text-indent: 2em;
-    //   line-height: 5vh;
-    //   padding: 20px 5vw;
-    // }
+    
   }
+  .bookcontion {
+      font-size: 16px;
+      text-indent: 2em;
+      line-height: 5vh;
+      padding: 20px 5vw;
+    }
 }
 
 .a {
