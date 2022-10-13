@@ -6,9 +6,13 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <div v-for="(n,i) in bookArr" :key="i">
+      <div v-for="(n, i) in bookArr" :key="i">
         <span class="zhangjieName">{{ n.chapterName }}</span>
-          <div v-html="arr" class="bookcontion"></div>
+        <div
+          v-if="contentlist.length > 0"
+          v-html="contentlist[i].content.replace(/(\r\n)|(\n)/g, '<p/>')"
+          class="bookcontion"
+        ></div>
       </div>
     </van-list>
   </div>
@@ -20,13 +24,14 @@ export default {
     return {
       arr: "",
       chapterList: [],
+      contentlist: [],
       loading: false,
       finished: false,
-      bookArr:[],
-      index:-1,
+      bookArr: [],
+      index: 0,
     };
   },
-  mounted() {
+  created() {
     this.getBookid();
   },
   methods: {
@@ -41,6 +46,7 @@ export default {
               this.chapterList.push(data.volumes[i].chapterList[j]);
             }
           }
+          this.getBookContent(this.chapterList[0].id);
         });
     },
 
@@ -48,21 +54,17 @@ export default {
       this.$axios
         .get(`/book/ReadContent.aspx?ver=260&from=2&chapterids=${id}`)
         .then(({ data }) => {
-          let replaceRegex = /(\r\n)|(\n)/g;
-          this.arr = data.content_list[0].content.replace(
-            replaceRegex,
-            "<p/>"
-          );
+          this.contentlist.push(data.content_list[0]);
         });
     },
     onLoad() {
       setTimeout(() => {
-        this.index++
-        this.bookArr.push(this.chapterList[this.index])
-        this.getBookContent(this.bookArr[this.index].id)
-        this.loading = false
+        this.index++;
+        this.bookArr.push(this.chapterList[this.index]);
+        this.getBookContent(this.chapterList[this.index].id);
+        this.loading = false;
         if (this.bookArr.length == this.chapterList.length) {
-          this.finished = true
+          this.finished = true;
         }
       }, 2000);
     },
@@ -76,14 +78,13 @@ export default {
   .zhangjieName {
     font-size: 12px;
     margin-left: 10px;
-    
   }
   .bookcontion {
-      font-size: 16px;
-      text-indent: 2em;
-      line-height: 5vh;
-      padding: 20px 5vw;
-    }
+    font-size: 16px;
+    text-indent: 2em;
+    line-height: 5vh;
+    padding: 20px 5vw;
+  }
 }
 
 .a {
