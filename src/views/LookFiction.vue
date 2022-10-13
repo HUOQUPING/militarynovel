@@ -28,7 +28,8 @@ export default {
       loading: false,
       finished: false,
       bookArr: [],
-      index: 0,
+      index: -1,
+      indexs:0,
     };
   },
   created() {
@@ -60,8 +61,9 @@ export default {
     onLoad() {
       setTimeout(() => {
         this.index++;
+        this.indexs++
         this.bookArr.push(this.chapterList[this.index]);
-        this.getBookContent(this.chapterList[this.index].id);
+        this.getBookContent(this.chapterList[this.indexs].id);
         this.loading = false;
         if (this.bookArr.length == this.chapterList.length) {
           this.finished = true;
