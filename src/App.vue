@@ -41,13 +41,13 @@ export default {
   },
   
   created() {
-    console.log(this.$router);
+    console.log(this.$route);
     
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 nav {
   display: flex;
   position: fixed;
@@ -59,6 +59,7 @@ nav {
   line-height: 80px;
   box-shadow: 0px 2px 5px black;
   background-color: white;
+  z-index: 50;
 
   .nav-item {
     flex: 1;

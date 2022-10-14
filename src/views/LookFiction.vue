@@ -1,5 +1,5 @@
 <template>
-  <div class="LookFicCont">
+  <div class="LookFicCont" @click="onclick($event)">
     <van-list
       v-model="loading"
       :finished="finished"
@@ -71,6 +71,10 @@ export default {
         }
       }, 2000);
     },
+    onclick(e){
+      console.log(e)
+      // console.log(e.x,e.y)
+    }
   },
 };
 </script>

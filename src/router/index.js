@@ -19,7 +19,7 @@ const routes = [
         name: 'booksearchword',
         component: BookcitySearch,
         meta: {
-            navShow: false
+            navShow: false // true显示，false隐藏
         }
     },
     {
@@ -27,7 +27,7 @@ const routes = [
         name: 'bookshelf',
         component: BookshelfView,
         meta: {
-            navShow: true, // true显示，false隐藏
+            navShow: true,
         },
     },
     {

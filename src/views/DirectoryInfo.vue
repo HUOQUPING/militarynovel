@@ -12,7 +12,7 @@
         <h3>
           {{ item.volumeName }}
         </h3>
-        <li v-for="item in item.chapterList" :key="item.id" @click="checkList(item.id,item.isVip)">
+        <li v-for="item in item.chapterList" :key="item.id" @click="goLookFiction(bookid,item.id)">
           {{ item.chapterName }}
           <span v-show="item.isVip == 0">免费</span>
           <span v-show="item.isVip == 1">{{ item.price }}铁血币</span>
@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import { Toast } from 'vant'
 export default {
   name: "DirectoryInfo",
   data() {
     return {
       bookData: [],
+      bookid:this.$route.query.id
     }
   },
   created() {
@@ -46,13 +46,9 @@ export default {
     back() {
       this.$router.back()
     },
-    checkList(id,vip){
-      if (vip == 1) {
-        Toast("您当前铁血币不足")
-      }else{
-        console.log(id);
-      }
-    },
+    goLookFiction(bookid,chapterid) {
+      this.$router.push(`/lookfiction?bookid=${bookid}&chapterid=${chapterid}`)
+    }
   }
 }
 </script>

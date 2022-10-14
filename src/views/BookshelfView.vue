@@ -1,70 +1,71 @@
 <template>
-  <div class="home">
-       <!-- <div class="zhaocheng"></div> -->
-      <div class="homeNav">
-        <span>书架</span>
-        <img
-          src="../assets/images/svg_search.png"
-          alt="搜索"
-          @click="goSearch"
-        />
-        <img src="../assets/images/svg_edit.png" alt="修改" @click="delbook" style="position: absolute;z-index:999"/>
-      </div>
+  <div class="home" :class="{zindex:!isGo}">
+    <div class="homeNav">
+      <span>书架</span>
+      <img src="../assets/images/svg_search.png" alt="搜索" v-show="isGo" @click="goSearch"/>
+      <img src="../assets/images/svg_edit.png" alt="修改" @click="alterBook()"/>
+      <span class="allSel" v-show="!isGo">全选</span>
+    </div>
 
+    <div class="mask" :class="{active : !isGo}">
       <ul class="bookList">
         <li v-for="n in bookArr" :key="n.bookid" @click="gobookInfo(n.bookid)">
-          <img :src="n.coverurl" />
-          <span>{{ n.bookname }}</span>
-          <p>{{ n.bookstatename }}</p>
-          <van-checkbox
-            v-model="checked"
-            icon-size="16px"
-            checked-color="rgb(237, 126, 56)"
-            class="checkbook"
-          ></van-checkbox>
+          <label>
+            <img :src="n.coverurl">
+            <span>{{ n.bookname }}</span>
+            <p>{{ n.bookstatename }}</p>
+            <input v-show="!isGo" class="zindex" type="checkbox" @click="addDelBookid(n.bookid)">
+          </label>
         </li>
       </ul>
-     
+    </div>
+
+    <nav class="del-box" v-show="!isGo">
+      <div @click="delBook()">删除</div>
+    </nav>
+
   </div>
 </template>
 
 <script>
+import {Toast} from "vant";
+
 export default {
   data() {
     return {
       bookArr: JSON.parse(localStorage.getItem("bookArr")) ?? [],
-      checked: true,
-      ifshow:false,
-      ifgo:true
-    };
-  },
-  mounted(){
-        console.log(this.$router);
+      isGo: true
+    }
   },
   methods: {
     goSearch() {
       this.$router.push("/booksearchword");
     },
     gobookInfo(id) {
-      if (this.ifgo == true) {
-        this.$router.push(`/bookinfo?id=${id}`);
+      if (this.isGo) {
+        this.$router.push(`/bookinfo?id=${id}`)
       }
-      
     },
-    delbook(){
-      this.ifgo = !this.ifgo
-      console.log(this.ifgo);
-      this.$router.options.routes[1].meta.navShow = !this.$router.options.routes[1].meta.navShow
+    alterBook() {
+      console.log(this.isGo, this.$router.options.routes[1].meta.navShow)
+      this.isGo = !this.isGo
+    },
+    addDelBookid(id) {
+      console.log(id)
+    },
+    delBook() {
+      Toast('删除')
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 .home {
+  position: relative;
   width: 100vw;
   padding-bottom: 50px;
-  // position: relative;
+
   .homeNav {
     position: sticky;
     top: 0;
@@ -75,7 +76,16 @@ export default {
     border-bottom: 1px solid #d3d3d3;
     text-align: center;
     line-height: 50px;
-    // background-color: white;
+    background-color: white;
+    z-index: 50;
+
+    .allSel{
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 25px;
+    }
+
     img {
       width: 30px;
       position: absolute;
@@ -86,19 +96,21 @@ export default {
         right: 10px;
       }
     }
+
   }
 
   .bookList {
     margin-top: 10px;
     width: 100%;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     li {
+      position: relative;
       flex: 0;
       height: 220px;
-      position: relative;
+      z-index: 49;
 
       img {
         width: 100px;
@@ -122,22 +134,47 @@ export default {
         margin-left: 10px;
       }
 
-      .checkbook {
+      input[type="checkbox"]{
+        display: block;
         position: absolute;
-        top: 4px;
-        right: 13px;
+        top: 0px;
+        right: 10px;
+        border-radius: 999px;
       }
     }
   }
 
-  .zhaocheng {
-    width: 100%;
-    height: 100vh;
-    background: red;
-    // background: #000;
-    position: absolute;
-    opacity: .2;
-    z-index: 20;
+  .mask {
+    &.active {
+      width: 100%;
+      height: auto;
+      background: #eee;
+      opacity: .5;
+      z-index: 10;
+    }
   }
+
+  nav {
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 55px;
+    line-height: 55px;
+    box-shadow: 0px 2px 5px black;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+
+    div {
+      height: 100%;
+    }
+  }
+}
+
+
+.zindex {
+  z-index: 99;
 }
 </style>
