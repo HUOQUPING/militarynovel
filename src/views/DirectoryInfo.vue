@@ -12,7 +12,7 @@
         <h3>
           {{ item.volumeName }}
         </h3>
-        <li v-for="item in item.chapterList" :key="item.id">
+        <li v-for="item in item.chapterList" :key="item.id" @click="checkList(item.id,item.isVip)">
           {{ item.chapterName }}
           <span v-show="item.isVip == 0">免费</span>
           <span v-show="item.isVip == 1">{{ item.price }}铁血币</span>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant'
 export default {
   name: "DirectoryInfo",
   data() {
@@ -44,6 +45,13 @@ export default {
     },
     back() {
       this.$router.back()
+    },
+    checkList(id,vip){
+      if (vip == 1) {
+        Toast("您当前铁血币不足")
+      }else{
+        console.log(id);
+      }
     },
   }
 }

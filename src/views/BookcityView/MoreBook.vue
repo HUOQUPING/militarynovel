@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="show == true">
     <div class="nav">
       <img
           src="../../assets/images/back_black.png"
@@ -26,7 +26,7 @@
 <script>
 import {typetool} from "@/utils/bookType";
 import MoreBookInfo from "@/components/module/MoreBookInfo.vue";
-
+import { Toast } from 'vant';
 export default {
   data() {
     return {
@@ -36,8 +36,24 @@ export default {
       finished: false,
       pagesize: 10,
       pageindex: 1,
-
+      show:false
     };
+  },
+  beforeCreate() {
+    Toast.loading({
+      message: "加载中...",
+      forbidClick: true,
+    });
+    let second = 1;
+    const timer = setInterval(() => {
+      second -= 0.5;
+      if (second == 0) {
+        this.show = true;
+        clearInterval(timer);
+        // 手动清除 Toast
+        Toast.clear();
+      } 
+    }, 500);
   },
   components: {
     MoreBookInfo,

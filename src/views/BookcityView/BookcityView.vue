@@ -4,7 +4,11 @@
       <!-- 搜索框 -->
       <BookcitySearch class="bookcity-search"></BookcitySearch>
       <!-- 轮播图 -->
-      <CarouselChart  class="carousel-chart" :imgArr="bookArr[9]" v-if="flag == true"></CarouselChart>
+      <CarouselChart
+        class="carousel-chart"
+        :imgArr="bookArr[9]"
+        v-if="flag == true"
+      ></CarouselChart>
       <!-- 分类 -->
       <ClassificationNav class="classification-nav"></ClassificationNav>
     </div>
@@ -13,17 +17,17 @@
       <!-- 今日热推 -->
       <div class="hot-today">
         <h3>今日热推</h3>
-        <bookModule  :bookArr="bookArr[0]"></bookModule>
+        <bookModule :bookArr="bookArr[0]"></bookModule>
       </div>
       <!-- 本周强推 -->
       <div class="push-thisWeek">
         <h3>本周强推<span @click="moreBook(2)">查看更多</span></h3>
-        <bookModule  :bookArr="bookArr[1]"></bookModule>
+        <bookModule :bookArr="bookArr[1]"></bookModule>
       </div>
       <!-- 24小时热销 -->
       <div class="hot-in24Hours">
         <h3>24小时热销</h3>
-        <StripModule  :bookArr="bookArr[2]" ></StripModule>
+        <StripModule :bookArr="bookArr[2]"></StripModule>
       </div>
       <!-- 经典全本 -->
       <div class="classic-complete">
@@ -33,22 +37,22 @@
       <!-- 军事小说 -->
       <div class="military-novel">
         <h3>军事小说<span @click="moreBook(6)">查看更多</span></h3>
-        <StripModule  :bookArr="bookArr[5]" ></StripModule>
+        <StripModule :bookArr="bookArr[5]"></StripModule>
       </div>
       <!-- 历史小说 -->
       <div class="historical-novel">
         <h3>历史小说<span @click="moreBook(7)">查看更多</span></h3>
-        <StripModule  :bookArr="bookArr[6]" ></StripModule>
+        <StripModule :bookArr="bookArr[6]"></StripModule>
       </div>
       <!-- 潜力新书 -->
       <div class="new-potentialbook">
         <h3>潜力新书<span @click="moreBook(8)">查看更多</span></h3>
-        <StripModule :bookArr="bookArr[7]" ></StripModule>
+        <StripModule :bookArr="bookArr[7]"></StripModule>
       </div>
       <!-- 更多爽文 -->
       <div class="moreCool-articles">
         <h3>更多爽文<span @click="moreBook(9)">查看更多</span></h3>
-        <StripModule  :bookArr="bookArr[8]" ></StripModule>
+        <StripModule :bookArr="bookArr[8]"></StripModule>
       </div>
     </div>
   </div>
@@ -62,13 +66,12 @@ import ClassificationNav from "@/components/ClassificationNav.vue";
 import bookModule from "@/components/module/BookModule.vue";
 import StripModule from "@/components/module/StripModule.vue";
 
-
 export default {
   name: "HomeView",
   data() {
     return {
       bookArr: [],
-      flag:false
+      flag: false,
     };
   },
   components: {
@@ -76,26 +79,25 @@ export default {
     CarouselChart,
     ClassificationNav,
     bookModule,
-    StripModule
+    StripModule,
   },
   created() {
     this.getData();
   },
   methods: {
     getData() {
-      this.$axios.get('/htm/defaultnew.htm?ver=260&from=1').then(({ data }) => {
-        console.log(data)
-        data.homeparts.forEach(el => {
+      this.$axios.get("/htm/defaultnew.htm?ver=260&from=1").then(({ data }) => {
+        console.log(data);
+        data.homeparts.forEach((el) => {
           this.bookArr.push(el.book_infos);
         });
-        this.flag = true
+        this.flag = true;
       });
     },
-    moreBook(num){
-      this.$router.push(`/more?type=${num}`)
-    }
+    moreBook(num) {
+      this.$router.push(`/more?type=${num}`);
+    },
   },
-
 };
 </script>
 
@@ -103,7 +105,7 @@ export default {
 .book-city {
   width: 100vw;
   padding-bottom: 50px;
-  background-color: rgb(241,237,237);
+  background-color: rgb(241, 237, 237);
   .header {
     width: 100%;
     height: 40vh;
@@ -131,7 +133,7 @@ export default {
       font-weight: 700;
       padding: 16px 0px 12px 10px;
 
-      span{
+      span {
         font-size: 14px;
         float: right;
         margin-right: 10px;

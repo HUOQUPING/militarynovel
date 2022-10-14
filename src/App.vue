@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="show == true">
     <router-view></router-view>
     <nav v-show="$route.meta.navShow">
       <router-link tag="div" class="nav-item icon-bookshelf" to="/bookshelf">
@@ -16,9 +16,33 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 export default {
+  data(){
+    return {
+      show:false
+    }
+  },
+   beforeCreate() {
+    Toast.loading({
+      message: "加载中...",
+      forbidClick: true,
+    });
+    let second = 1;
+    const timer = setInterval(() => {
+      second -= 0.5;
+      if (second == 0) {
+        this.show = true;
+        clearInterval(timer);
+        // 手动清除 Toast
+        Toast.clear();
+      } 
+    }, 500);
+  },
+  
   created() {
     console.log(this.$router);
+    
   }
 }
 </script>

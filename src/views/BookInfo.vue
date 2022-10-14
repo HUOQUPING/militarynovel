@@ -1,6 +1,6 @@
 <script src="../router/index.js"></script>
 <template>
-  <div class="book-info" v-if="flag == true">
+  <div class="book-info" v-if="flag == true && show == true">
     <div v-if="bookinfo[0].ret == 0">
       <div class="back-btn" :class="{ bgcolor: isShow }">
         <img src="../assets/images/back_white.png" alt="返回" @click="back()" />
@@ -101,11 +101,28 @@ export default {
       isShow: false,
       obj: [],
       flag: false,
+      show:false
     };
   },
   components: {
     RecommendedModule,
     CommentModule,
+  },
+   beforeCreate() {
+    Toast.loading({
+      message: "加载中...",
+      forbidClick: true,
+    });
+    let second = 1;
+    const timer = setInterval(() => {
+      second -= 0.5;
+      if (second == 0) {
+        this.show = true;
+        clearInterval(timer);
+        // 手动清除 Toast
+        Toast.clear();
+      } 
+    }, 500);
   },
   created() {
     this.getInfo(this.$route.query.id);

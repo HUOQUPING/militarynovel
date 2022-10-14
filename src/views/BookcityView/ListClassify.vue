@@ -1,5 +1,5 @@
 <template>
-  <div class="list-classify">
+  <div class="list-classify" v-if="show == true">
     <div class="list-cl-head">
       <img src="../../assets/images/back_black.png" @click="comeback" />
       <span>{{ text[0] }}</span>
@@ -10,18 +10,22 @@
           <li
             v-for="(txt, i) in text[1]"
             :key="i"
-            :class="{ activeCss: activeVar == i}"
+            :class="{ activeCss: activeVar == i }"
             @click="highLight(i)"
-            
           >
             {{ txt }}
           </li>
         </ul>
       </div>
       <div class="li-cl-ma-ri">
-        <router-link tag="li" v-for="(w, i) in mainArr" :key="i" :to="'/bookinfo?id='+w.bookid">
+        <router-link
+          tag="li"
+          v-for="(w, i) in mainArr"
+          :key="i"
+          :to="'/bookinfo?id=' + w.bookid"
+        >
           <div class="ri-img">
-           <img :src="w.coverurl" :onerror="defaults"/>
+            <img :src="w.coverurl" :onerror="defaults" />
           </div>
           <div class="ri-txt">
             <p>{{ w.bookname }}</p>
@@ -43,14 +47,32 @@
 
 <script>
 import { typetool } from "@/utils/bookType";
+import { Toast } from 'vant';
 export default {
   data() {
     return {
+      show:false,
       text: [],
       mainArr: [],
-      activeVar:this.$route.query.type,
-      defaults:'this.src="' + require('../../assets/images/nocover.jpg')+'"'
+      activeVar: this.$route.query.type,
+      defaults: 'this.src="' + require("../../assets/images/nocover.jpg") + '"',
     };
+  },
+  beforeCreate() {
+    Toast.loading({
+      message: "加载中...",
+      forbidClick: true,
+    });
+    let second = 1;
+    const timer = setInterval(() => {
+      second -= 0.5;
+      if (second == 0) {
+        this.show = true;
+        clearInterval(timer);
+        // 手动清除 Toast
+        Toast.clear();
+      }
+    }, 500);
   },
   mounted() {
     this.getData(this.$route.query.type);
@@ -120,7 +142,6 @@ export default {
       left: 0;
       height: 100%;
       background: rgb(241 237 237 / 64%);
-
     }
 
     & .li-cl-ma-lf ul li {
@@ -129,8 +150,8 @@ export default {
       text-align: center;
       line-height: 50px;
     }
-    .li-cl-ma-ri{
-      margin-left:70px ;
+    .li-cl-ma-ri {
+      margin-left: 70px;
     }
     & .li-cl-ma-ri li {
       width: 100%;
@@ -173,5 +194,4 @@ export default {
     }
   }
 }
-
 </style>

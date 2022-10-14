@@ -7,8 +7,12 @@ import { Icon } from 'vant';
 import { List } from 'vant';
 import { Image as VanImage } from 'vant';
 import { Dialog } from 'vant';
+import { Checkbox, CheckboxGroup } from 'vant';
+import { Loading } from 'vant';
 
-
+Vue.use(Loading);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
 Vue.use(Dialog);
 Vue.use(VanImage);
 Vue.use(List);

@@ -23,19 +23,18 @@
     </div>
 
     <div class="settingItem">
-      <div>意见反馈<span>&gt;</span></div>
-      <div>检查更新<span>&gt;</span></div>
+      <div @click="getSomeSuggest">意见反馈<span>&gt;</span></div>
+      <div @click="checkGengXin">检查更新<span>&gt;</span></div>
       <div>赏个好评<span>&gt;</span></div>
-      <div>清除缓存<span>&gt;</span></div>
-      <div>关于<span>&gt;</span></div>
+      <div @click="clearNeiChun">清除缓存<span>&gt;</span></div>
+      <div @click="YouKnowMore">关于<span>&gt;</span></div>
       <div @click="exitUser">退出账号<span>&gt;</span></div>
     </div>
   </div>
 </template>
 
 <script>
-import { Toast } from 'vant';
-import { Dialog } from 'vant';
+import { Toast, Dialog } from "vant";
 export default {
   data() {
     return {
@@ -43,6 +42,7 @@ export default {
       userName: null ?? "点击登录",
     };
   },
+  
   mounted() {
     this.checkLogin();
   },
@@ -63,24 +63,56 @@ export default {
     exitUser() {
       if (this.userName != "点击登录") {
         Dialog.confirm({
-          message:"热血读书:是否退出账号"
+          message: "热血读书:是否退出账号",
         })
-        .then(()=>{
-          for (let i = 0; i < this.userMsg.length; i++) {
-            if (this.userName == this.userMsg[i].userName) {
-              this.userMsg[i].loginStatus = false;
-              localStorage.setItem("UserMsg", JSON.stringify(this.userMsg));
-              this.userName = null ?? "点击登录";
+          .then(() => {
+            for (let i = 0; i < this.userMsg.length; i++) {
+              if (this.userName == this.userMsg[i].userName) {
+                this.userMsg[i].loginStatus = false;
+                localStorage.setItem("UserMsg", JSON.stringify(this.userMsg));
+                this.userName = null ?? "点击登录";
+              }
             }
-          }
-           Toast("热血读书:退出成功");
-        })
-        .catch(()=>{
-          return;
-        })
-      }else {
-         Toast("热血读书:当前未登录账号")
+            Toast("热血读书:退出成功");
+          })
+          .catch(() => {
+            return;
+          });
+      } else {
+        Toast("热血读书:当前未登录账号");
       }
+    },
+    clearNeiChun() {
+      Toast("已清空缓存");
+    },
+    checkGengXin() {
+      Toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: "正在检查版本",
+      });
+
+      let second = 3;
+      const timer = setInterval(() => {
+        second--;
+        if (second) {
+          Toast("已经是最新版本");
+        } else {
+          clearInterval(timer);
+          // 手动清除 Toast
+          Toast.clear();
+        }
+      }, 1000);
+    },
+    YouKnowMore() {
+      let href =
+        "https://www.baidu.com/s?wd=%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84%E5%A4%AA%E5%A4%9A%E4%BA%86";
+      window.open(href, "_blank");
+    },
+    getSomeSuggest() {
+      let href =
+        "https://www.baidu.com/s?wd=%E8%B0%A2%E8%B0%A2%E4%BD%A0%E7%9A%84%E4%BA%94%E6%98%9F%E5%A5%BD%E8%AF%84";
+      window.open(href, "_blank");
     },
   },
 };

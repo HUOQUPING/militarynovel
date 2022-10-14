@@ -47,6 +47,7 @@ export default {
               this.chapterList.push(data.volumes[i].chapterList[j]);
             }
           }
+          
           this.getBookContent(this.chapterList[0].id);
         });
     },
