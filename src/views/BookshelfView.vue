@@ -137,8 +137,7 @@ export default {
 
     li {
       position: relative;
-      flex: 0 0 33.3%;
-      // padding: .5vw;
+      flex: 0 0 33%;
       height: 220px;
       z-index: 49;
 

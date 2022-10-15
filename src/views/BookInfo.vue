@@ -139,7 +139,11 @@ export default {
     },
     // 返回
     back() {
-      window.history.go(-1);
+      if (this.$route.query.bookinfoback){
+        this.$router.go(-3)
+        return
+      }
+      this.$router.go(-1)
     },
     // 存入本地存储
     addToBookshelf(bookid, coverurl, bookname, bookstatename) {

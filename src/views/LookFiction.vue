@@ -29,7 +29,7 @@
           src="../assets/images/back_white.png"
           alt="返回"
           class="back"
-          @click="comeback"
+          @click="back"
         />
         <img
           src="../assets/images/more.png"
@@ -175,8 +175,11 @@ export default {
       }
       this.moreShow = false;
     },
+    back() {
+      this.$router.back()
+    },
     comeback() {
-      this.$router.replace(`/bookinfo?id=${this.$route.query.id}`);
+      this.$router.replace(`/bookinfo?id=${this.$route.query.id}&bookinfoback=true`);
     },
     moreinfo() {
       this.moreShow = !this.moreShow;
