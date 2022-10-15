@@ -4,7 +4,7 @@
       <span>书架</span>
       <img src="../assets/images/svg_search.png" alt="搜索" v-show="isGo" @click="goSearch"/>
       <img src="../assets/images/svg_edit.png" alt="修改" @click="alterBook()"/>
-      <span class="allSel" v-show="!isGo">全选</span>
+<!--      <span class="allSel" v-show="!isGo" @click="allSel()">{{ selectBtn }}</span>-->
     </div>
 
     <div class="mask" :class="{active : !isGo}">
@@ -14,7 +14,7 @@
             <img :src="n.coverurl">
             <span>{{ n.bookname }}</span>
             <p>{{ n.bookstatename }}</p>
-            <input v-show="!isGo" class="zindex" type="checkbox" @click="addDelBookid(n.bookid)">
+            <input v-show="!isGo" class="zindex" type="checkbox" ref="checkbox" @click="addDelBookid(n.bookid)">
           </label>
         </li>
       </ul>
@@ -34,7 +34,14 @@ export default {
   data() {
     return {
       bookArr: JSON.parse(localStorage.getItem("bookArr")) ?? [],
+      selectBtn: '全选',
+      delArr: [],
       isGo: true
+    }
+  },
+  watch: {
+    delArr() {
+      console.log('watch', this.delArr)
     }
   },
   methods: {
@@ -51,10 +58,33 @@ export default {
       this.isGo = !this.isGo
     },
     addDelBookid(id) {
+      this.delArr = []
       console.log(id)
+      for (let i = 0; i < this.delArr.length; i++) {
+        if (this.delArr[i] == id) {
+          this.delArr = this.delArr.filter(item => item != id)
+          return
+        }
+      }
+      this.delArr.push(id)
+    },
+    allSel() {
+      this.delArr = []
+      for (let i = 0; i < this.bookArr.length; i++) {
+        this.delArr.push(this.bookArr[i].bookid)
+      }
     },
     delBook() {
-      Toast('删除')
+      console.log(this.bookArr)
+      for (let i = 0; i < this.bookArr.length; i++) {
+        for (let j = 0; j < this.delArr.length; j++) {
+          if (this.bookArr[i].bookid == this.delArr[j]){
+            this.bookArr.splice(i,1)
+          }
+        }
+      }
+      localStorage.setItem("bookArr", JSON.stringify(this.bookArr));
+      Toast('删除成功')
     }
   }
 }
@@ -79,7 +109,7 @@ export default {
     background-color: white;
     z-index: 50;
 
-    .allSel{
+    .allSel {
       display: block;
       position: absolute;
       top: 0px;
@@ -104,11 +134,11 @@ export default {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 
     li {
       position: relative;
       flex: 0;
+      padding: 1.5vw;
       height: 220px;
       z-index: 49;
 
@@ -134,7 +164,7 @@ export default {
         margin-left: 10px;
       }
 
-      input[type="checkbox"]{
+      input[type="checkbox"] {
         display: block;
         position: absolute;
         top: 0px;
@@ -147,7 +177,7 @@ export default {
   .mask {
     &.active {
       width: 100%;
-      height: auto;
+      min-height: 100vh;
       background: #eee;
       opacity: .5;
       z-index: 10;
@@ -169,6 +199,8 @@ export default {
 
     div {
       height: 100%;
+      flex: 1;
+      text-align: center;
     }
   }
 }

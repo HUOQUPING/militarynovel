@@ -11,6 +11,7 @@ import RegisterView from "../views/SettingView/RegisterView.vue"
 import MoreBook from "../views/BookcityView/MoreBook.vue"
 import ListClassify from "../views/BookcityView/ListClassify.vue"
 import LookFiction from "../views/LookFiction.vue"
+
 Vue.use(VueRouter)
 
 const routes = [
