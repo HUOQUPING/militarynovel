@@ -76,7 +76,7 @@
         >
           加入书架
         </div>
-        <div class="readding" @click="goLookFiction(bookinfo[0].bookid)">开始阅读</div>
+        <div class="readding" @click="goLookFiction(bookinfo[0].bookid,bookinfo[0].bookname)">开始阅读</div>
         <div>购买章节</div>
       </div>
     </div>
@@ -185,8 +185,8 @@ export default {
         this.isShow = false;
       }
     },
-    goLookFiction(id){
-      this.$router.push(`/lookfiction?id=${id}`)
+    goLookFiction(id,name){
+      this.$router.push(`/lookfiction?id=${id}&bookname=${name}`)
     }
   },
   mounted() {

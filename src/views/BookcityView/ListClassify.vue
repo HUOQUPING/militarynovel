@@ -17,6 +17,13 @@
           </li>
         </ul>
       </div>
+      <van-list
+          v-model="loading"
+          :finished="finished"
+          :immediate-check="false"
+          finished-text="没有更多了"
+          @load="onLoad"
+      >
       <div class="li-cl-ma-ri">
         <router-link
           tag="li"
@@ -41,6 +48,7 @@
           </div>
         </router-link>
       </div>
+      </van-list>
     </div>
   </div>
 </template>
@@ -56,6 +64,10 @@ export default {
       mainArr: [],
       activeVar: this.$route.query.type,
       defaults: 'this.src="' + require("../../assets/images/nocover.jpg") + '"',
+      pageindex:1,
+      pagesize:10,
+      loading:false,
+      finished:false
     };
   },
   beforeCreate() {
@@ -83,9 +95,9 @@ export default {
   methods: {
     getData(type) {
       this.$axios
-        .get(`/htm/readlist_${type}_1.htm?pagesize=10&pageindex=1`)
+        .get(`/htm/readlist_${type}_1.htm?pagesize=${this.pagesize}&pageindex=${this.pageindex}`)
         .then(({ data }) => {
-          this.mainArr = data.bookinfos;
+          this.mainArr =  this.mainArr.concat( data.bookinfos) ;
         });
     },
 
@@ -96,6 +108,28 @@ export default {
     highLight(i) {
       this.activeVar = i;
       this.getData(i);
+    },
+    onLoad() {
+
+      let self = this
+
+
+      setTimeout(() => {
+
+        self.pageindex += 1
+        self.getData(this.$route.query.type)
+
+        // 加载状态结束
+        this.loading = false;
+
+        // 停止加载数据
+
+        if (self.mainArr[(self.mainArr.length - 1) - (self.pagesize - 1)].bookid == self.mainArr[0].bookid || self.mainArr.length < self.pagesize) {
+          this.finished = true;
+        }
+
+      }, 2000);
+
     },
   },
 };

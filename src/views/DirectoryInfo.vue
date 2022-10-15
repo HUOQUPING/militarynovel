@@ -47,7 +47,7 @@ export default {
       this.$router.back()
     },
     goLookFiction(bookid,chapterid) {
-      this.$router.push(`/lookfiction?bookid=${bookid}&chapterid=${chapterid}`)
+      this.$router.push(`/lookfiction?id=${bookid}&chapterid=${chapterid}&bookname=${this.$route.query.bookname}`)
     }
   }
 }
