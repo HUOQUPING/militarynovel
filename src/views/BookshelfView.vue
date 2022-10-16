@@ -58,7 +58,7 @@ export default {
       this.isGo = !this.isGo
     },
     addDelBookid(id) {
-      this.delArr = []
+      // this.delArr = []
       console.log(id)
       for (let i = 0; i < this.delArr.length; i++) {
         if (this.delArr[i] == id) {
@@ -69,7 +69,7 @@ export default {
       this.delArr.push(id)
     },
     allSel() {
-      this.delArr = []
+      // this.delArr = []
       for (let i = 0; i < this.bookArr.length; i++) {
         this.delArr.push(this.bookArr[i].bookid)
       }
