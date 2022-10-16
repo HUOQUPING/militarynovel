@@ -97,7 +97,8 @@ export default {
       this.$axios
         .get(`/htm/readlist_${type}_1.htm?pagesize=${this.pagesize}&pageindex=${this.pageindex}`)
         .then(({ data }) => {
-          this.mainArr =  this.mainArr.concat( data.bookinfos) ;
+          this.mainArr = [].concat(data.bookinfos);
+          // this.mainArr =  this.mainArr.concat( data.bookinfos);
         });
     },
 

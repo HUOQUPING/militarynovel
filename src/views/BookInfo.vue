@@ -64,8 +64,8 @@
 
       <!-- 按钮 -->
       <div class="btn-box">
-        <div
-          @click="
+        <div :class="{readding:inShelf}"
+             @click="
             addToBookshelf(
               bookinfo[0].bookid,
               bookinfo[0].coverurl,
@@ -74,7 +74,7 @@
             )
           "
         >
-          加入书架
+          {{ inBookShelf(bookinfo[0].bookid) }}
         </div>
         <div class="readding" @click="goLookFiction(bookinfo[0].bookid,bookinfo[0].bookname)">开始阅读</div>
         <div>购买章节</div>
@@ -101,7 +101,8 @@ export default {
       isShow: false,
       obj: [],
       flag: false,
-      show:false
+      show: false,
+      inShelf: false,
     };
   },
   components: {
@@ -132,7 +133,7 @@ export default {
       this.$axios
         .get(`/book/ReadBookDetail.aspx?ver=200&from=1&bookid=${id}`)
         .then(({ data }) => {
-          console.log(data);
+          // console.log(data);
           this.bookinfo.push(data);
           this.flag = true;
         })
@@ -159,7 +160,7 @@ export default {
           }
         }
         bookArr.push({
-           bookid: bookid,
+          bookid: bookid,
           coverurl: coverurl,
           bookname: bookname,
           bookstatename: bookstatename,
@@ -174,10 +175,23 @@ export default {
           bookstatename: bookstatename,
         });
         localStorage.setItem("bookArr", JSON.stringify(this.obj));
-         Toast("已加入书架")
+        Toast("已加入书架")
       }
     },
-    directory(id,bookname){
+    inBookShelf(id) {
+      let inLocal = JSON.parse(localStorage.getItem("bookArr"))
+      if (inLocal) {
+        for (let i = 0; i < inLocal.length; i++) {
+          if (id == inLocal[i].bookid) {
+            this.inShelf = true
+            return '已在书架'
+          }
+        }
+        this.inShelf = false
+        return '加入书架'
+      }
+    },
+    directory(id, bookname) {
       this.$router.push(`/bookinfo/directory?id=${id}&bookname=${bookname}`)
     },
     isScroll() {
@@ -371,6 +385,7 @@ export default {
         background-color: #ed7e38;
       }
     }
+
   }
   .copyright-issues {
     width: 100vw;

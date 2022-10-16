@@ -30,7 +30,7 @@ export default {
         this.$refs.ul.$el.style.transition = "left .5s linear";
         if (
           this.index ==
-          this.imgArr.concat(this.imgArr[0]).length - 1
+            this.imgArr.concat(this.imgArr[0]).length - 1
         ) {
           this.index = 0
           this.$refs.ul.$el.ontransitionend = function () {
@@ -38,9 +38,9 @@ export default {
             self.$refs.ul.$el.style.left = "0";
             self.$refs.ul.$el.ontransitionend = null
           };
-         
+
         }
-      }, 1000);
+     }, 3000);
     },
   },
   mounted() {
@@ -79,7 +79,7 @@ export default {
 .carousel ul li img {
   display: block;
   width: 100%;
-  height: 26vh;
+  height: 100%;
 }
 
 .buffer {

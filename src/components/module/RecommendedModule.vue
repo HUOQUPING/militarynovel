@@ -36,18 +36,25 @@ export default {
     overflow: auto;
     display: flex;
     li {
+      width: 20%;
       flex: 0 0 20vw;
       margin: 0 12px;
       text-align: center;
+
       img {
         display: block;
         width: 20vw;
         height: 15vh;
       }
+
       span {
+        width: 100%;
         display: block;
+        font-size: 13px;
         margin: 1vh 0;
-        display: -webkit-box;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        //display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
