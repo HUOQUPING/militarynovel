@@ -25,7 +25,7 @@
     <div class="settingItem">
       <div @click="getSomeSuggest">意见反馈<span>&gt;</span></div>
       <div @click="checkGengXin">检查更新<span>&gt;</span></div>
-      <div>赏个好评<span>&gt;</span></div>
+      <div @click="goodreputation">赏个好评<span>&gt;</span></div>
       <div @click="clearNeiChun">清除缓存<span>&gt;</span></div>
       <div @click="YouKnowMore">关于<span>&gt;</span></div>
       <div @click="exitUser">退出账号<span>&gt;</span></div>
@@ -42,7 +42,7 @@ export default {
       userName: null ?? "点击登录",
     };
   },
-  
+
   mounted() {
     this.checkLogin();
   },
@@ -112,6 +112,11 @@ export default {
     getSomeSuggest() {
       let href =
         "https://www.baidu.com/s?wd=%E8%B0%A2%E8%B0%A2%E4%BD%A0%E7%9A%84%E4%BA%94%E6%98%9F%E5%A5%BD%E8%AF%84";
+      window.open(href, "_blank");
+    },
+    goodreputation() {
+      let href =
+        "https://pic1.imgdb.cn/item/634d3ebd16f2c2beb1395adb.jpg";
       window.open(href, "_blank");
     },
   },
