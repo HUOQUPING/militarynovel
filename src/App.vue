@@ -37,7 +37,7 @@ export default {
         // 手动清除 Toast
         Toast.clear();
       } 
-    }, 500);
+    }, 250);
   },
   
   created() {

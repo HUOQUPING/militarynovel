@@ -30,7 +30,10 @@
       </div>
       <!-- 目录及最新章节 -->
       <div class="catalogues">
-        <div class="catalogues-box" @click="directory(bookinfo[0].bookid,bookinfo[0].bookname)">
+        <div
+          class="catalogues-box"
+          @click="directory(bookinfo[0].bookid, bookinfo[0].bookname)"
+        >
           <p class="catalogue-p">
             目录
             <span>&gt;</span>
@@ -64,8 +67,9 @@
 
       <!-- 按钮 -->
       <div class="btn-box">
-        <div :class="{readdings:inShelf}"
-             @click="
+        <div
+          :class="{ readdings: inShelf }"
+          @click="
             addToBookshelf(
               bookinfo[0].bookid,
               bookinfo[0].coverurl,
@@ -76,7 +80,12 @@
         >
           {{ inBookShelf(bookinfo[0].bookid) }}
         </div>
-        <div class="readding" @click="goLookFiction(bookinfo[0].bookid,bookinfo[0].bookname)">开始阅读</div>
+        <div
+          class="readding"
+          @click="goLookFiction(bookinfo[0].bookid, bookinfo[0].bookname)"
+        >
+          开始阅读
+        </div>
         <div>购买章节</div>
       </div>
     </div>
@@ -92,7 +101,7 @@
 <script>
 import RecommendedModule from "@/components/module/RecommendedModule.vue";
 import CommentModule from "@/components/module/CommentModule.vue";
-import { Toast } from 'vant';
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -109,7 +118,15 @@ export default {
     RecommendedModule,
     CommentModule,
   },
-   beforeCreate() {
+  watch:{
+    '$route.query.id'(nV,oV){
+      console.log(nV,oV);
+      if (nV != oV) {
+        location.reload()
+      }
+    }
+  },
+  beforeCreate() {
     Toast.loading({
       message: "加载中...",
       forbidClick: true,
@@ -122,12 +139,13 @@ export default {
         clearInterval(timer);
         // 手动清除 Toast
         Toast.clear();
-      } 
-    }, 500);
+      }
+    }, 50);
   },
   created() {
     this.getInfo(this.$route.query.id);
   },
+
   methods: {
     getInfo(id) {
       this.$axios
@@ -136,15 +154,15 @@ export default {
           // console.log(data);
           this.bookinfo.push(data);
           this.flag = true;
-        })
+        });
     },
     // 返回
     back() {
-      if (this.$route.query.bookinfoback){
-        this.$router.go(-3)
-        return
+      if (this.$route.query.bookinfoback) {
+        this.$router.go(-3);
+        return;
       }
-      this.$router.go(-1)
+      this.$router.back();
     },
     // 存入本地存储
     addToBookshelf(bookid, coverurl, bookname, bookstatename) {
@@ -153,10 +171,10 @@ export default {
       let bookArr = JSON.parse(localStorage.getItem("bookArr"));
 
       if (bookArr) {
-        for(let i = 0; i < bookArr.length; i++){
-          if(bookArr[i].bookid == bookid){
-            Toast('图书已加入书架')
-            return
+        for (let i = 0; i < bookArr.length; i++) {
+          if (bookArr[i].bookid == bookid) {
+            Toast("图书已加入书架");
+            return;
           }
         }
         bookArr.push({
@@ -164,9 +182,9 @@ export default {
           coverurl: coverurl,
           bookname: bookname,
           bookstatename: bookstatename,
-        })
+        });
         localStorage.setItem("bookArr", JSON.stringify(bookArr));
-        Toast("已加入书架")
+        Toast("已加入书架");
       } else {
         this.obj.push({
           bookid: bookid,
@@ -175,24 +193,24 @@ export default {
           bookstatename: bookstatename,
         });
         localStorage.setItem("bookArr", JSON.stringify(this.obj));
-        Toast("已加入书架")
+        Toast("已加入书架");
       }
     },
     inBookShelf(id) {
-      let inLocal = JSON.parse(localStorage.getItem("bookArr"))
+      let inLocal = JSON.parse(localStorage.getItem("bookArr"));
       if (inLocal) {
         for (let i = 0; i < inLocal.length; i++) {
           if (id == inLocal[i].bookid) {
-            this.inShelf = true
-            return '已在书架'
+            this.inShelf = true;
+            return "已在书架";
           }
         }
-        this.inShelf = false
-        return '加入书架'
+        this.inShelf = false;
+        return "加入书架";
       }
     },
     directory(id, bookname) {
-      this.$router.push(`/bookinfo/directory?id=${id}&bookname=${bookname}`)
+      this.$router.push(`/bookinfo/directory?id=${id}&bookname=${bookname}`);
     },
     isScroll() {
       const top = document.documentElement.scrollTop;
@@ -203,9 +221,9 @@ export default {
         this.isShow = false;
       }
     },
-    goLookFiction(id,name){
-      this.$router.push(`/lookfiction?id=${id}&bookname=${name}`)
-    }
+    goLookFiction(id, name) {
+      this.$router.push(`/lookfiction?id=${id}&bookname=${name}`);
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.isScroll);
@@ -385,7 +403,6 @@ export default {
         background-color: #ed7e38;
       }
     }
-
   }
   .copyright-issues {
     width: 100vw;
