@@ -1,9 +1,13 @@
 <template>
-  <div class="recommended"> 
+  <div class="recommended">
     <ul>
-      <li v-for="t in recommendList" :key="t.bookid">
+      <li
+        v-for="t in recommendList"
+        :key="t.bookid"
+        @click="gobookinfo(t.bookid)"
+      >
         <img :src="t.coverurl" />
-        <span>{{t.bookname}}</span>
+        <span>{{ t.bookname }}</span>
       </li>
     </ul>
   </div>
@@ -17,6 +21,14 @@ export default {
   watch: {
     recommendList(newV) {
       console.log(newV);
+    },
+  },
+  methods: {
+    gobookinfo(id) {
+      if (this.$route.query.id != id) {
+        this.$router.push(`/bookinfo?id=${id}`);
+        this.$router.go(0);
+      }
     },
   },
   props: ["recommendList"],

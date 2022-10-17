@@ -64,7 +64,7 @@
 
       <!-- 按钮 -->
       <div class="btn-box">
-        <div 
+        <div :class="{readdings:inShelf}"
              @click="
             addToBookshelf(
               bookinfo[0].bookid,
