@@ -2,8 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import VueAxiosPlugin from 'vue-axios-plugin'
-import {Checkbox, CheckboxGroup, Dialog, Icon, Image as VanImage, List, Loading, Toast,Popup,PullRefresh } from 'vant';
+import {Checkbox, CheckboxGroup, Dialog, Icon, Image as VanImage, List, Loading, Toast,Popup,PullRefresh,Swipe,SwipeItem,Lazyload } from 'vant';
 
+Vue.use(Lazyload);
+Vue.use(Swipe);
+Vue.use(SwipeItem);
 Vue.use(PullRefresh )
 Vue.use(Popup)
 Vue.use(Loading);

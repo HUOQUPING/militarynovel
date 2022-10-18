@@ -4,11 +4,7 @@
       <!-- 搜索框 -->
       <BookcitySearch class="bookcity-search"></BookcitySearch>
       <!-- 轮播图 -->
-      <CarouselChart
-        class="carousel-chart"
-        :imgArr="bookArr[9]"
-        v-if="flag == true"
-      ></CarouselChart>
+      <CarouselChart class="carousel-chart"></CarouselChart>
       <!-- 分类 -->
       <ClassificationNav class="classification-nav"></ClassificationNav>
     </div>

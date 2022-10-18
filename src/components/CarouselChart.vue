@@ -1,90 +1,28 @@
 <template>
-  <div class="carousel" >
-    <transition-group class="container" tag="ul" ref="ul" >
-      <li
-        v-for="(t,i) in imgArr.concat(imgArr[0])"
-        :key="i"
-      >
-        <img :src="t.coverurl" />
-      </li>
-    </transition-group>
+  <div class="carousel">
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" height="140" :lazy-render="true">
+      <van-swipe-item><img src="https://pic1.imgdb.cn/item/634e72bc16f2c2beb1a236b6.png" alt=""></van-swipe-item>
+      <van-swipe-item><img src="https://pic1.imgdb.cn/item/634e72ce16f2c2beb1a283a5.png" alt=""></van-swipe-item>
+      <van-swipe-item><img src="https://pic1.imgdb.cn/item/634e72d916f2c2beb1a2a75a.png" alt=""></van-swipe-item>
+    </van-swipe>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      index: 0,
-      timer:null
-    };
-  },
-  props: ["imgArr"],
-
-  methods: {
-    autoPlay() {
-     this.timer = setInterval(() => {
-        let self =this
-        this.index++;
-        this.$refs.ul.$el.style.left = `${-this.index * 100}%`;
-        this.$refs.ul.$el.style.transition = "left .5s linear";
-        if (
-          this.index ==
-            this.imgArr.concat(this.imgArr[0]).length - 1
-        ) {
-          this.index = 0
-          this.$refs.ul.$el.ontransitionend = function () {
-            self.$refs.ul.$el.style.transition = "none";
-            self.$refs.ul.$el.style.left = "0";
-            self.$refs.ul.$el.ontransitionend = null
-          };
-
-        }
-     }, 3000);
-    },
-  },
-  mounted() {
-    this.autoPlay();
-  },
-  beforeDestroy(){
-    if(this.timer){
-      clearInterval(this.timer)
-    }
-  }
-};
-</script>
-
 <style lang="scss" scoped>
-
 .carousel {
-  position: relative;
-  width: 400px;
-  height: 200px;
   overflow: hidden;
 }
+  .my-swipe .van-swipe-item {
+    color: #fff;
+    font-size: 20px;
+    line-height: 150px;
+    text-align: center;
+    background-color: #39a9ed;
+    border-radius: 10px;
 
-.carousel ul {
-  position: absolute;
-  top: 0;
-  left: 0%;
-  width: 1000%;
-}
-
-.carousel ul li {
-  float: left;
-  width: 10%;
-  height: 26vh;
-}
-
-.carousel ul li img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.buffer {
-  transition: left 0.3s;
-}
-
-
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 </style>
