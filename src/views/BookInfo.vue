@@ -145,6 +145,7 @@ export default {
   },
   created() {
     this.getInfo(this.$route.query.id);
+    this.inBookShelf(this.$route.query.id);
   },
 
   methods: {
@@ -203,7 +204,7 @@ export default {
         for (let i = 0; i < inLocal.length; i++) {
           if (id == inLocal[i].bookid) {
             this.inShelf = true;
-            return  this.isInBookshelf = "已在书架";
+            return this.isInBookshelf = "已在书架";
           }
         }
         this.inShelf = false;
