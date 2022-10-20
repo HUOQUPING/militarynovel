@@ -18,5 +18,6 @@ module.exports = defineConfig({
                 }
             }
         },
-    }
+    },
+    publicPath: '/reading-with-iron-and-blood/',
 })
