@@ -42,7 +42,6 @@ export default {
   
   created() {
     console.log(this.$route);
-    
   }
 }
 </script>
@@ -64,7 +63,7 @@ nav {
   .nav-item {
     flex: 1;
     background-size: 30px 30px;
-    background-position: center 0px;
+    background-position: center 0;
     background-repeat: no-repeat;
     color: #555;
     font-size: 12px;

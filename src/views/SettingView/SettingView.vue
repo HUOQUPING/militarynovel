@@ -63,7 +63,7 @@ export default {
     exitUser() {
       if (this.userName != "点击登录") {
         Dialog.confirm({
-          message: "热血读书:是否退出账号",
+          message: "是否退出账号",
         })
           .then(() => {
             for (let i = 0; i < this.userMsg.length; i++) {
@@ -73,13 +73,13 @@ export default {
                 this.userName = null ?? "点击登录";
               }
             }
-            Toast("热血读书:退出成功");
+            Toast("退出成功");
           })
           .catch(() => {
             return;
           });
       } else {
-        Toast("热血读书:当前未登录账号");
+        Toast("当前未登录账号");
       }
     },
     clearNeiChun() {

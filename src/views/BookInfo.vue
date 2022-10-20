@@ -78,7 +78,7 @@
             )
           "
         >
-          {{ inBookShelf(bookinfo[0].bookid) }}
+          {{ isInBookshelf }}
         </div>
         <div
           class="readding"
@@ -112,6 +112,7 @@ export default {
       flag: false,
       show: false,
       inShelf: false,
+      isInBookshelf:'加入书架'
     };
   },
   components: {
@@ -202,11 +203,11 @@ export default {
         for (let i = 0; i < inLocal.length; i++) {
           if (id == inLocal[i].bookid) {
             this.inShelf = true;
-            return "已在书架";
+            return  this.isInBookshelf = "已在书架";
           }
         }
         this.inShelf = false;
-        return "加入书架";
+        return this.isInBookshelf = "加入书架";
       }
     },
     directory(id, bookname) {
